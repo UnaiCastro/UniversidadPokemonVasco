@@ -1,5 +1,7 @@
 package Modelo;
 
+import Vista.InterfazJuegoPokemon;
+
 public class GestorJuegoPokemon {
 	private static GestorJuegoPokemon miGestorJuego;
 	private ListaJugadores jugadores;
@@ -13,5 +15,10 @@ public class GestorJuegoPokemon {
 			miGestorJuego = new GestorJuegoPokemon();
 		}
 		return miGestorJuego;
+	}
+
+	public void addObserver(InterfazJuegoPokemon interfazJuegoPokemon) {
+		// TODO Auto-generated method stub
+		
 	}
 }
