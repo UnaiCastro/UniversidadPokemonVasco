@@ -3,6 +3,8 @@ package Modelo;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import AñoPasado.packModelo.SuperJugador;
+
 
 public class ListaJugadores {
 	private ArrayList<SuperJugador> lJugadores;
@@ -36,5 +38,17 @@ public class ListaJugadores {
 		}
 		return null;
 	}
+	
+	
 
+
+	//public abstract void registrar(int numPlayers, int numNPCs, int numPokemon);
+		//for (int i = 0; i < numPlayers+numNPCs; i++) {
+			
+		//}
+	//}
+	//public void anadirJugador(SuperJugador pJugador) {
+		//this.lJugadores.add(pJugador);
+	//}
+	
 }

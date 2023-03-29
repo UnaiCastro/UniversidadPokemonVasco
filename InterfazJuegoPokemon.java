@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +33,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
+import Controlador.Controler;
 import Modelo.GestorJuegoPokemon;
 
 
@@ -65,7 +67,7 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 	        try {
 	            JLabel imageLabel = new JLabel();
 	            Image image = ImageIO.read(new File("C:/Users/kasme/OneDrive/Escritorio/main.png"));
-	            Image scaledImage = image.getScaledInstance(540, 1080, Image.SCALE_SMOOTH);
+	            Image scaledImage = image.getScaledInstance(800, 400, Image.SCALE_SMOOTH);
 	            ImageIcon icon = new ImageIcon(scaledImage);
 	            imageLabel.setIcon(icon);
 	            imagePanel.add(imageLabel);
@@ -101,6 +103,7 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 	        startButton = new JButton("Empezar Partida");
 	        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 	        buttonPanel.add(startButton);
+	        startButton.addActionListener(Controler.getMiControlador());
 
 	        fieldsPanel.add(Box.createVerticalGlue());
 	        fieldsPanel.add(playersPanel);
@@ -124,5 +127,21 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	//public void addStartButtonListener(ActionListener listener) {
+      //  startButton.addActionListener(listener);
+    //}
+
+    public int getPlayers() {
+        return Integer.parseInt(playersField.getText());
+    }
+
+    public int getNPCs() {
+        return Integer.parseInt(npcsField.getText());
+    }
+
+    public int getPokemon() {
+        return Integer.parseInt(pokemonField.getText());
+    }
 	
 }

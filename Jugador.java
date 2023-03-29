@@ -4,7 +4,7 @@ public class Jugador extends SuperJugador{
 	
 	public Jugador() {
 		this.equipoPokemon = new Equipo();
-		this.nombre= "jugador";
+		//this.nombre= "jugador";
 	}
 	
 	public String getNombre() {

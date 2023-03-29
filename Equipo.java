@@ -18,7 +18,7 @@ public class Equipo {
 		return this.lPokemon.iterator();
 	}
 	
-	public void anadirArma(Pokemon pPokemon){
+	public void anadirPokemon(Pokemon pPokemon){
 		this.lPokemon.add(pPokemon);
 	}
 
