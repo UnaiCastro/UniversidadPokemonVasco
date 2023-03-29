@@ -23,10 +23,17 @@ public class InterfazJugador extends JFrame {
 		setVisible(true);
 		GestorJuegoPokemon.getMiGestorJuegoPokemon().addObserver(this);
 	}
-    public void inicializar(String playerName, int numPokemon, int nJugador) {
+    private void inicializar(String playerName, int numPokemon, int nJugador) {
     	setTitle("Pantalla de jugador"+nJugador);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
         setPreferredSize(new Dimension(300*(numPokemon)+300, 500));
+        
+     // Botón "Jugar"
+        //JButton jButton1 = new javax.swing.JButton();
+        //jButton1.setText("Jugar");
+        //jButton1.setBounds(20, 390, 300, 50);
+        //Container jPanel1 = null;
+		//jPanel1.add(jButton1);
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());

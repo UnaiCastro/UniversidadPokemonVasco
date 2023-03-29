@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -34,6 +35,7 @@ import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
 import Controlador.Controler;
+import Controlador.PlayerController;
 import Modelo.GestorJuegoPokemon;
 
 
@@ -45,7 +47,7 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
     private JTextField npcsField;
     private JTextField pokemonField;
     private JLabel imageLabel;
-	
+    private Controler miControlador;
 	
 	public InterfazJuegoPokemon () {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,7 +105,7 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 	        startButton = new JButton("Empezar Partida");
 	        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 	        buttonPanel.add(startButton);
-	        startButton.addActionListener(Controler.getMiControlador());
+	        this.startButton.addActionListener(getMiControlador());
 
 	        fieldsPanel.add(Box.createVerticalGlue());
 	        fieldsPanel.add(playersPanel);
@@ -120,6 +122,50 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 
 	        frame.add(mainPanel);
 	        frame.setVisible(true);
+	}
+	
+	
+	public Controler getMiControlador() {
+		if (miControlador==null) {
+			miControlador=new Controler();
+		}
+		return miControlador;
+	}
+	
+	
+	private class Controler implements ActionListener {
+		
+		
+	    private Controler() {
+	    	
+	    }
+	    
+		
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource().equals(startButton)){
+				System.out.println("Jugadores a Jugar");
+				int numPlayers = getPlayers();
+				int numNPCs = getNPCs();
+				int numPokemon = getPokemon();
+				String jugador = "jugador";
+				String NPC = "NPC";
+			
+	    // Llamada al modelo para iniciar la partida
+				GestorJuegoPokemon.getMiGestorJuegoPokemon().empieza(numPlayers, numNPCs, numPokemon);
+
+	    // Crear la vista de los jugadores
+				for (int i = 0; i < numPlayers; i++) {
+					InterfazJugador playerView = new InterfazJugador(jugador , numPokemon, i+1);
+					PlayerController playerController = new PlayerController();
+					System.out.println("Creada pantalla jugador"+i+1);
+				}
+				for (int i = 0; i < numNPCs; i++) {
+					InterfazJugador playerView = new InterfazJugador(NPC , numPokemon, i+1);
+					PlayerController playerController = new PlayerController();
+					System.out.println("Creada pantalla NPC"+i+1);
+				}
+			}
+		}
 	}
 
 	@Override

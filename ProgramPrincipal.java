@@ -8,10 +8,10 @@ import Vista.InterfazJugador;
 public class ProgramPrincipal {
 	public static void main(String[] args) {
 		GestorJuegoPokemon.getMiGestorJuegoPokemon();
-		//InterfazJuegoPokemon interfaz = new InterfazJuegoPokemon();
-		String player="Player";
-		int pokemon= 1;
-		int jugador=1;
-		InterfazJugador interfazJugador = new InterfazJugador(player,pokemon,jugador);
+		InterfazJuegoPokemon interfaz = new InterfazJuegoPokemon();
+		//String player="Player";
+		//int pokemon= 1;
+		//int jugador=1;
+		//InterfazJugador interfazJugador = new InterfazJugador(player,pokemon,jugador);
 	}
 }

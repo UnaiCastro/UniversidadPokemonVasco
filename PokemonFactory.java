@@ -1,10 +1,5 @@
 package Modelo;
 
-import AñoPasado.packModelo.Arma;
-import AñoPasado.packModelo.Bomba;
-import AñoPasado.packModelo.Escudo;
-import AñoPasado.packModelo.Misil;
-import AñoPasado.packModelo.Radar;
 
 public class PokemonFactory {
 

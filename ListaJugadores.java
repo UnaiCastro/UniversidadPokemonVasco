@@ -3,9 +3,6 @@ package Modelo;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import AñoPasado.packModelo.SuperJugador;
-
-
 public class ListaJugadores {
 	private ArrayList<SuperJugador> lJugadores;
 	

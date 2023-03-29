@@ -7,13 +7,13 @@ public class Jugador extends SuperJugador{
 		//this.nombre= "jugador";
 	}
 	
-	public String getNombre() {
-		return this.nombre;
-	}
+	//public String getNombre() {
+		//return this.nombre;
+	//}
 	
-	public void setNombre(String pNombre) {
-		this.nombre=pNombre;
-	}
+	//public void setNombre(String pNombre) {
+		//this.nombre=pNombre;
+	//}
 	
 
 }

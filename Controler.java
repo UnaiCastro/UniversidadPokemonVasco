@@ -43,10 +43,12 @@ public class Controler implements ActionListener {
 			for (int i = 0; i < numPlayers; i++) {
 				InterfazJugador playerView = new InterfazJugador(jugador , numPokemon, i+1);
 				PlayerController playerController = new PlayerController();
+				System.out.println("Creada pantalla jugador"+i+1);
 			}
 			for (int i = 0; i < numNPCs; i++) {
 				InterfazJugador playerView = new InterfazJugador(NPC , numPokemon, i+1);
 				PlayerController playerController = new PlayerController();
+				System.out.println("Creada pantalla NPC"+i+1);
 			}
 		}
 	}
