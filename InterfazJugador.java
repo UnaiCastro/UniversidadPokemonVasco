@@ -5,26 +5,31 @@ import javax.swing.*;
 import Modelo.GestorJuegoPokemon;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class InterfazJugador extends JFrame {
 	private String playerName;
+	private int numPokemon;
+	private int nJugador;
     private JPanel mainPanel;
     private JLabel titleLabel;
     private JLabel playerImageLabel;
     private JLabel[] pokemonImageLabels;
-    private int numPokemon;
-    private int nJugador;
+    private ControlerJugador miControlador;
+
+   
     
     
     public InterfazJugador (String playerName, int numPokemon, int nJugador) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		inicializar(this.playerName, this.numPokemon, this.nJugador);
+		inicializar(playerName, numPokemon, nJugador);
 		setVisible(true);
 		GestorJuegoPokemon.getMiGestorJuegoPokemon().addObserver(this);
 	}
     private void inicializar(String playerName, int numPokemon, int nJugador) {
-    	setTitle("Pantalla de jugador"+nJugador);
+    	setTitle("Pantalla de"+" " + playerName +" "+nJugador);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
         setPreferredSize(new Dimension(300*(numPokemon)+300, 500));
         
@@ -61,6 +66,28 @@ public class InterfazJugador extends JFrame {
 
         setImages(playerName, numPokemon);
     }
+    
+    public ControlerJugador getMiControlador() {
+		if (miControlador==null) {
+			miControlador=new ControlerJugador();
+		}
+		return miControlador;
+	}
+	
+	
+	private class ControlerJugador implements ActionListener {
+		
+		
+	    private ControlerJugador() {
+	    	
+	    }
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
 
     private void setImages(String playerName, int numPokemon) {
         Random random = new Random();

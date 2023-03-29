@@ -34,8 +34,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
-import Controlador.Controler;
-import Controlador.PlayerController;
+
 import Modelo.GestorJuegoPokemon;
 
 
@@ -147,37 +146,32 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 				int numPlayers = getPlayers();
 				int numNPCs = getNPCs();
 				int numPokemon = getPokemon();
-				String jugador = "jugador";
-				String NPC = "NPC";
+				
 			
 	    // Llamada al modelo para iniciar la partida
-				GestorJuegoPokemon.getMiGestorJuegoPokemon().empieza(numPlayers, numNPCs, numPokemon);
-
+				//GestorJuegoPokemon.getMiGestorJuegoPokemon().empieza(numPlayers, numNPCs, numPokemon);
+				update (null,null);
 	    // Crear la vista de los jugadores
-				for (int i = 0; i < numPlayers; i++) {
-					InterfazJugador playerView = new InterfazJugador(jugador , numPokemon, i+1);
-					PlayerController playerController = new PlayerController();
-					System.out.println("Creada pantalla jugador"+i+1);
-				}
-				for (int i = 0; i < numNPCs; i++) {
-					InterfazJugador playerView = new InterfazJugador(NPC , numPokemon, i+1);
-					PlayerController playerController = new PlayerController();
-					System.out.println("Creada pantalla NPC"+i+1);
-				}
+				
 			}
 		}
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
+		for (int i = 0; i < 2; i++) {
+			InterfazJugador playerView = new InterfazJugador("Jugador" , 7, i+1);
+			int numero=i+1;
+			System.out.println("Creada pantalla jugador" +" " +numero);
+		}
+		for (int i = 0; i < 2; i++) {
+			InterfazJugador playerView = new InterfazJugador("NPC" , 7, i+1);
+			int numero=i+1;
+			System.out.println("Creada pantalla NPC" +" " +numero);
+		}
 		
 	}
-	
-	//public void addStartButtonListener(ActionListener listener) {
-      //  startButton.addActionListener(listener);
-    //}
-
+	//Arriba como todavia no tenemos lo del modelo hacemos pruebas nosotros
     public int getPlayers() {
         return Integer.parseInt(playersField.getText());
     }
