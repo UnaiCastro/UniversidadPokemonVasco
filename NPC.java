@@ -4,9 +4,12 @@ public class NPC extends SuperJugador{
 	
 	public NPC() {
 		this.equipoPokemon = new Equipo();
-		//this.nombre= "NPC";
+		this.nombre= "NPC";
 	}
 	
+//	public void añadirPokemons(String pNombre, int numPokemon) {
+//		this.equipoPokemon.
+//	}
 	//public String getNombre() {
 		//return this.nombre;
 	//}

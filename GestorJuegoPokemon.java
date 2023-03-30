@@ -23,10 +23,11 @@ public class GestorJuegoPokemon {
 		
 	}
 
-	//public void empieza(int numPlayers, int numNPCs, int numPokemon) {
-		//this.jugadores.registrar(numPlayers, numNPCs,numPokemon);
+	public void empieza(int numPlayers, int numNPCs, int numPokemon) {
+		//System.out.println("Ha llegado la llamada a GestorJuego");
+		this.jugadores.registrar(numPlayers, numNPCs,numPokemon);
 		
-	//}
+	}
 
 	public void addObserver(InterfazJugador interfazJugador) {
 		// TODO Auto-generated method stub

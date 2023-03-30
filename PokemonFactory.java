@@ -26,6 +26,9 @@ public class PokemonFactory {
 		else if(pTipo=="Fuego") {
 			return new Fuego();
 		}
+		else if (pTipo=="Normal") {
+			return new Normal();
+		}
 		else {
 			return new Electrico();
 		}
