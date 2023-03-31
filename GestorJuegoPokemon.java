@@ -28,12 +28,11 @@ public class GestorJuegoPokemon extends Observable{
 		this.jugadores.registrar(numPlayers, numNPCs,numPokemon);
 		//this.jugadores.decirNombres();
 		//this.jugadores.verPokemons();
-		int tamaño=this.jugadores.getSize();
+		//int tamaño=this.jugadores.getSize();
 		//System.out.println("Tmaño= "+tamaño);
 		ArrayList<Object> report = new ArrayList<Object>();
-		
 		report.add(this.jugadores.getMisJugadores());
-		report.add(false);
+		//report.add(false);
 		//int si=report.size();
 		//System.out.println("Hay "+si);
 		//report.add(this.jugadores.get)
@@ -44,13 +43,18 @@ public class GestorJuegoPokemon extends Observable{
 		this.notifyObservers(report);
 	}
 
-	public void addObserver(InterfazJugador interfazJugador) {
-		this.addObserver(interfazJugador);
-		
-	}
+//	public void addObserver(InterfazJugador interfazJugador) {
+//		this.addObserver(interfazJugador);
+//		
+//	}
 	
 	public void addObserverJuego(InterfazJuegoPokemon interfazJuegoPokemon) {
 		this.addObserver(interfazJuegoPokemon);
+		
+	}
+
+	public void accionarAtaque(SuperJugador jugador2, Pokemon pokemon2, Pokemon pokemon) {
+		this.jugadores.buscarYAtacar(jugador2,pokemon2,pokemon);
 		
 	}
 	

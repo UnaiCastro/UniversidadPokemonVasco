@@ -1,7 +1,9 @@
 package Vista;
 
 import javax.swing.*;
+import javax.xml.soap.Text;
 
+import Modelo.Equipo;
 import Modelo.GestorJuegoPokemon;
 
 import java.awt.*;
@@ -24,14 +26,19 @@ public class InterfazJugador extends JFrame implements Observer {
    
     
     
-    public InterfazJugador (String playerName, int numPokemon, int nJugador) {
+    public InterfazJugador (String playerName, int numPokemon, Equipo pEquipo) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		inicializar(playerName, numPokemon, nJugador);
+		inicializar(playerName, numPokemon, nJugador, pEquipo);
 		setVisible(true);
+		if (playerName.equals("Jugador")) {
+			//Añadir
+		}else {
+			//Añadir Observer NPC
+		}
 		//GestorJuegoPokemon.getMiGestorJuegoPokemon().addObserver(this);
 	}
-    private void inicializar(String playerName, int numPokemon, int nJugador) {
-    	setTitle(playerName + " " + nJugador);
+    private void inicializar(String playerName, int numPokemon, int nJugador, Equipo pEquipo) {
+    	setTitle(playerName);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -50,7 +57,7 @@ public class InterfazJugador extends JFrame implements Observer {
         int minimo = 0;
         int maximo = 5;
         int numeroAleatorio = rand.nextInt((maximo - minimo) + 1) + minimo;
-        System.out.println(numeroAleatorio);
+        //System.out.println(numeroAleatorio);
         ImageIcon imagenJugador = new ImageIcon("C:/Users/kasme/OneDrive/Escritorio/Pokemon_Fotos/Jugadores/trainer"+(numeroAleatorio)+".png");
         JLabel labelImagenJugador = new JLabel(imagenJugador);
         labelImagenJugador.setBounds(10, 50, 300, 350);
@@ -72,9 +79,15 @@ public class InterfazJugador extends JFrame implements Observer {
             panelPrincipal.add(labelImagenPokemon);
 
             // Creamos el botón debajo de la imagen del pokemon
-            JButton botonPokemon = new JButton("Botón " + (i + 1));
+            String info ="Ataque: "+pEquipo.getPokemon(i).getAtaque()+"\nDefensa: "+pEquipo.getPokemon(i).getDefensa()+"\nVida: "+pEquipo.getPokemon(i).getVida()+"\n Tipo: "+pEquipo.getPokemon(i).getTipo();
+            JLabel informacionLabel = new JLabel(info);
+            informacionLabel.setBounds(posicionPokemonX, posicionPokemonY +10, 300, 30);
+            panelPrincipal.add(informacionLabel);
+//          add(informacionLabel);
+            JButton botonPokemon = new JButton("Ataca!");          
             botonPokemon.setBounds(posicionPokemonX, posicionPokemonY + 350, 250, 30);
             panelPrincipal.add(botonPokemon);
+//          labelImagenPokemon.setText(info);
 
             posicionPokemonX += 250;
         }

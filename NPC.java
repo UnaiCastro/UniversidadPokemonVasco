@@ -1,10 +1,12 @@
 package Modelo;
 
+import java.util.Observable;
+
 public class NPC extends SuperJugador{
 	
-	public NPC() {
+	public NPC(String pNombre) {
 		this.equipoPokemon = new Equipo();
-		this.nombre= "NPC";
+		this.nombre= pNombre;
 	}
 	
 //	public void añadirPokemons(String pNombre, int numPokemon) {

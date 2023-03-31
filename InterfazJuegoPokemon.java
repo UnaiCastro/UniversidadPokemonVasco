@@ -35,7 +35,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
-import AñoPasado.packModelo.GestorJuego;
+import Modelo.Equipo;
 import Modelo.GestorJuegoPokemon;
 import Modelo.ListaJugadores;
 import Modelo.SuperJugador;
@@ -163,18 +163,16 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 			ArrayList<SuperJugador> jugadores = (ArrayList<SuperJugador>) ((ArrayList) arg).get(0);
 			jugadores.size();
 			Iterator<SuperJugador> into =jugadores.iterator();
-			int iJugador=0;
-			int iNPC=0;
+			int iJugador=1;
 			while(into.hasNext()) {
 				SuperJugador act=into.next();
-				System.out.println("Soy "+act);
-				System.out.println("Tengo :"+act.getMiEquipo().getTamanoEquipo());
-				if (act.getNombre().equals("Jugador")){
-					new InterfazJugador("Jugador" ,act.getMiEquipo().getTamanoEquipo(), iJugador+1);
+				System.out.println("Soy "+act.getNombre());
+				Equipo pEquipo=act.getMiEquipo();
+				if (act.getNombre().equals("Jugador"+" "+iJugador)){
+					new InterfazJugador(act.getNombre(),act.getMiEquipo().getTamanoEquipo(),pEquipo);
 					iJugador++;
 				}else {
-					new InterfazJugador("NPC" ,act.getMiEquipo().getTamanoEquipo(), iNPC+1);
-					iNPC++;
+					new InterfazJugador(act.getNombre() ,act.getMiEquipo().getTamanoEquipo(), pEquipo);
 				}
 			}
 		}

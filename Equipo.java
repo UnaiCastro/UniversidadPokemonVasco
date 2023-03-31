@@ -20,10 +20,10 @@ public class Equipo {
 	
 	public void anadirPokemon(int nPokemon){
 		//this.lPokemon.add(pPokemon);
-		//System.out.println("Hola estas en el Equipo :)");
+		System.out.println("Hola estas en el Equipo :)");
 		for (int i=0;i<nPokemon;i++) {
-			this.lPokemon.add(PokemonFactory.getMiArmaFactory().createPokemon("Normal"));
 			int real=i+1;
+			this.lPokemon.add(PokemonFactory.getMiArmaFactory().createPokemon("Normal","Pokemon"+" "+real));
 			//System.out.println("Creado Pokemon numero"+" "+real);
 		}
 		this.comprobarLista();
@@ -31,12 +31,9 @@ public class Equipo {
 	}
 	public void comprobarLista() {
 		Iterator<Pokemon> itr=this.getIterador();
-		int i=0;
 		while (itr.hasNext()) {
 			Pokemon act =itr.next();
-			int real=i+1;
-			//System.out.println("Hola soy el pokemon numero "+real+" y soy de tipo "+act.tipo+" y tengo estas caracteristicas: Ataque "+act.ataque+" Defensa: "+act.defensa+" y Vida: "+act.vida);
-			i++;
+			System.out.println("Hola soy :"+act.getNombre()+"y soy de tipo "+act.tipo+" y tengo estas caracteristicas: Ataque "+act.ataque+" Defensa: "+act.defensa+" y Vida: "+act.vida);
 		}
 	}
 

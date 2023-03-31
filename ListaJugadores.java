@@ -57,27 +57,25 @@ public class ListaJugadores {
 	
 	
 	public void registrar(int numPlayers, int numNPCs, int numPokemon) {
-		//System.out.println("Ha llegado la llmada a ListaJugadores");
+		System.out.println("Ha llegado la llmada a ListaJugadores");
 		for(int i=0;i<numNPCs;i++) {
 			int num=i+1;
 			String nombre="NPC"+" " +num;
-			NPC npc= new NPC();
+			NPC npc= new NPC(nombre);
 			this.lJugadores.add(npc);
-			//System.out.println("Se ha añadido:"+" "+nombre);
+			System.out.println("Se ha añadido:"+" "+npc.getNombre());
 			//npc.setNombre(nombre);
 			npc.añadirPokemons(numPokemon);
 		}
 		for(int i=0;i<numPlayers;i++) {
 			int num=i+1;
 			String nombre="Jugador"+" " +num;
-			Jugador jugador= new Jugador();
+			Jugador jugador= new Jugador(nombre);
 			this.lJugadores.add(jugador);
-			//System.out.println("Se ha añadido:"+" "+nombre);
+			System.out.println("Se ha añadido:"+" "+jugador.getNombre());
 			//jugador.setNombre(nombre);
 			jugador.añadirPokemons(numPokemon);
 		}
-		//int jug= this.getSize();
-		//System.out.println("Hay"+" "+jug+" ");
 		
 	}
 
@@ -99,6 +97,11 @@ public class ListaJugadores {
 	
 	public SuperJugador getSuperJugadorPosicion(int i) {
 		return this.lJugadores.get(i);
+	}
+
+	public void buscarYAtacar(SuperJugador jugador2, Pokemon pokemon2, Pokemon pokemon) {
+		
+		
 	}
 	
 	

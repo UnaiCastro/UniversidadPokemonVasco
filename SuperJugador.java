@@ -1,6 +1,8 @@
 package Modelo;
 
-public abstract class SuperJugador {
+import java.util.Observable;
+
+public abstract class SuperJugador extends Observable{
 	protected Equipo equipoPokemon;
 	protected String nombre;
 	
@@ -12,7 +14,7 @@ public abstract class SuperJugador {
 	public void añadirPokemons(int numPokemons)
 	{
 		//this.añadirNombre(pNombre);
-		//System.out.println("Creando pokemons de:"+this.nombre);
+		System.out.println("Creando pokemons de:"+this.nombre);
 		this.equipoPokemon.anadirPokemon(numPokemons);
 		
 	}

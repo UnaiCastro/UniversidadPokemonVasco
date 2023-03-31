@@ -2,9 +2,9 @@ package Modelo;
 
 public class Jugador extends SuperJugador{
 	
-	public Jugador() {
+	public Jugador(String pJugador) {
 		this.equipoPokemon = new Equipo();
-		this.nombre= "Jugador";
+		this.nombre= pJugador;
 	}
 	
 //	public void añadirPokemons(String pNombre, int numPokemon) {
