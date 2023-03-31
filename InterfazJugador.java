@@ -31,7 +31,7 @@ public class InterfazJugador extends JFrame implements Observer {
 		//GestorJuegoPokemon.getMiGestorJuegoPokemon().addObserver(this);
 	}
     private void inicializar(String playerName, int numPokemon, int nJugador) {
-    	setTitle(playerName + " - Jugador " + nJugador);
+    	setTitle(playerName + " " + nJugador);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -59,13 +59,14 @@ public class InterfazJugador extends JFrame implements Observer {
         // Creamos las imágenes de los pokemons
         int posicionPokemonX = 320;
         int posicionPokemonY = 50;
-        Random rand1 = new Random();
-        int minimo1 = 1;
-        int maximo1 = 5;
-        int numeroAleatorio1 = rand.nextInt((maximo1 - minimo1) + 1) + minimo1;
-        System.out.println(numeroAleatorio1);
-        for (int i = 0; i < numPokemon; i++) {        	
-            ImageIcon imagenPokemon = new ImageIcon("C:/Users/kasme/OneDrive/Escritorio/Pokemon_Fotos/Jugadores/Pokemon" + (numeroAleatorio1) + ".png");
+        
+        for (int i = 0; i < numPokemon; i++) {  
+        	Random rand1 = new Random();
+            int minimo1 = 1;
+            int maximo1 = 5;
+            int numeroAleatorio1 = rand1.nextInt((maximo1 - minimo1) + 1) + minimo1;
+            System.out.println(numeroAleatorio1);
+            ImageIcon imagenPokemon = new ImageIcon("C:/Users/kasme/OneDrive/Escritorio/Pokemon_Fotos/Pokemons/Pokemon" + (numeroAleatorio1) + ".png");
             JLabel labelImagenPokemon = new JLabel(imagenPokemon);
             labelImagenPokemon.setBounds(posicionPokemonX, posicionPokemonY, 250, 350);
             panelPrincipal.add(labelImagenPokemon);
@@ -79,17 +80,17 @@ public class InterfazJugador extends JFrame implements Observer {
         }
 
         // Creamos los botones debajo de las imágenes de los pokemons
-        JButton boton1 = new JButton("Botón 1");
-        boton1.setBounds(320, 410, 100, 30);
-        panelPrincipal.add(boton1);
-
-        JButton boton2 = new JButton("Botón 2");
-        boton2.setBounds(430, 410, 100, 30);
-        panelPrincipal.add(boton2);
-
-        JButton boton3 = new JButton("Botón 3");
-        boton3.setBounds(540, 410, 100, 30);
-        panelPrincipal.add(boton3);
+//        JButton boton1 = new JButton("Botón 1");
+//        boton1.setBounds(320, 410, 100, 30);
+//        panelPrincipal.add(boton1);
+//
+//        JButton boton2 = new JButton("Botón 2");
+//        boton2.setBounds(430, 410, 100, 30);
+//        panelPrincipal.add(boton2);
+//
+//        JButton boton3 = new JButton("Botón 3");
+//        boton3.setBounds(540, 410, 100, 30);
+//        panelPrincipal.add(boton3);
 
         setSize(320 + numPokemon * 250, 540);
         setLocationRelativeTo(null);
