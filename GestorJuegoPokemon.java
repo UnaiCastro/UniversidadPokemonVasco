@@ -1,9 +1,12 @@
 package Modelo;
 
+import java.util.ArrayList;
+import java.util.Observable;
+
 import Vista.InterfazJuegoPokemon;
 import Vista.InterfazJugador;
 
-public class GestorJuegoPokemon {
+public class GestorJuegoPokemon extends Observable{
 	private static GestorJuegoPokemon miGestorJuego;
 	private ListaJugadores jugadores;
 	
@@ -18,19 +21,37 @@ public class GestorJuegoPokemon {
 		return miGestorJuego;
 	}
 
-	public void addObserver(InterfazJuegoPokemon interfazJuegoPokemon) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	public void empieza(int numPlayers, int numNPCs, int numPokemon) {
 		//System.out.println("Ha llegado la llamada a GestorJuego");
 		this.jugadores.registrar(numPlayers, numNPCs,numPokemon);
+		//this.jugadores.decirNombres();
+		//this.jugadores.verPokemons();
+		int tamaño=this.jugadores.getSize();
+		//System.out.println("Tmaño= "+tamaño);
+		ArrayList<Object> report = new ArrayList<Object>();
 		
+		report.add(this.jugadores.getMisJugadores());
+		report.add(false);
+		//int si=report.size();
+		//System.out.println("Hay "+si);
+		//report.add(this.jugadores.get)
+		//report.add(this.jugadores.getSize());
+		//report.add(this.jugadores.getJugador().getMiEquipo());
+		//report.add(this.jugadores.getJugador().getNombre());
+		this.setChanged();
+		this.notifyObservers(report);
 	}
 
 	public void addObserver(InterfazJugador interfazJugador) {
-		// TODO Auto-generated method stub
+		this.addObserver(interfazJugador);
 		
 	}
+	
+	public void addObserverJuego(InterfazJuegoPokemon interfazJuegoPokemon) {
+		this.addObserver(interfazJuegoPokemon);
+		
+	}
+	
 }

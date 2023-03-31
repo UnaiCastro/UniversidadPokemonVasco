@@ -12,7 +12,7 @@ public abstract class SuperJugador {
 	public void añadirPokemons(int numPokemons)
 	{
 		//this.añadirNombre(pNombre);
-		System.out.println("Creando pokemons de:"+this.nombre);
+		//System.out.println("Creando pokemons de:"+this.nombre);
 		this.equipoPokemon.anadirPokemon(numPokemons);
 		
 	}

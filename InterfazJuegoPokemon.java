@@ -15,6 +15,7 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -34,12 +35,15 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
-
+import AñoPasado.packModelo.GestorJuego;
 import Modelo.GestorJuegoPokemon;
+import Modelo.ListaJugadores;
+import Modelo.SuperJugador;
 
 
 
 public class InterfazJuegoPokemon extends JFrame implements Observer {
+	
 	private JFrame frame;
     private JButton startButton;
     private JTextField playersField;
@@ -52,7 +56,7 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		inicializar();
 		setVisible(true);
-		GestorJuegoPokemon.getMiGestorJuegoPokemon().addObserver(this);
+		GestorJuegoPokemon.getMiGestorJuegoPokemon().addObserverJuego(this);
 	}
 	
 	private void inicializar() {
@@ -67,7 +71,7 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 	        JPanel imagePanel = new JPanel();
 	        try {
 	            JLabel imageLabel = new JLabel();
-	            Image image = ImageIO.read(new File("C:/Users/kasme/OneDrive/Escritorio/main.png"));
+	            Image image = ImageIO.read(new File("C:/Users/kasme/OneDrive/Escritorio/Pokemon_Fotos/main.png"));
 	            Image scaledImage = image.getScaledInstance(800, 400, Image.SCALE_SMOOTH);
 	            ImageIcon icon = new ImageIcon(scaledImage);
 	            imageLabel.setIcon(icon);
@@ -146,32 +150,38 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 				int numPlayers = getPlayers();
 				int numNPCs = getNPCs();
 				int numPokemon = getPokemon();
+				GestorJuegoPokemon.getMiGestorJuegoPokemon().empieza(numPlayers, numNPCs, numPokemon);
 				
-			
-	    // Llamada al modelo para iniciar la partida
-				//GestorJuegoPokemon.getMiGestorJuegoPokemon().empieza(numPlayers, numNPCs, numPokemon);
-				update (null,null);
-	    // Crear la vista de los jugadores
 				
 			}
 		}
 	}
 
 	@Override
-	public void update(Observable arg0, Object arg1) {
-		for (int i = 0; i < 2; i++) {
-			InterfazJugador playerView = new InterfazJugador("Jugador" , 7, i+1);
-			int numero=i+1;
-			System.out.println("Creada pantalla jugador" +" " +numero);
+	public void update(Observable o, Object arg) {
+		if(arg instanceof ArrayList<?>) {
+			ArrayList<SuperJugador> jugadores = (ArrayList<SuperJugador>) ((ArrayList) arg).get(0);
+			jugadores.size();
+			Iterator<SuperJugador> into =jugadores.iterator();
+			int iJugador=0;
+			int iNPC=0;
+			while(into.hasNext()) {
+				SuperJugador act=into.next();
+				System.out.println("Soy "+act);
+				System.out.println("Tengo :"+act.getMiEquipo().getTamanoEquipo());
+				if (act.getNombre().equals("Jugador")){
+					new InterfazJugador("Jugador" ,act.getMiEquipo().getTamanoEquipo(), iJugador+1);
+					iJugador++;
+				}else {
+					new InterfazJugador("NPC" ,act.getMiEquipo().getTamanoEquipo(), iNPC+1);
+					iNPC++;
+				}
+			}
 		}
-		for (int i = 0; i < 2; i++) {
-			InterfazJugador playerView = new InterfazJugador("NPC" , 7, i+1);
-			int numero=i+1;
-			System.out.println("Creada pantalla NPC" +" " +numero);
-		}
-		
+		System.out.println("Empezar Partida Chicos!!!");
 	}
-	//Arriba como todavia no tenemos lo del modelo hacemos pruebas nosotros
+				
+			
     public int getPlayers() {
         return Integer.parseInt(playersField.getText());
     }

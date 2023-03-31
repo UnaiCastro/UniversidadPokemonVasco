@@ -7,6 +7,7 @@ import Vista.InterfazJugador;
 
 public class ProgramPrincipal {
 	public static void main(String[] args) {
+		System.out.println("Bienvenidos A Pokemon");
 		GestorJuegoPokemon.getMiGestorJuegoPokemon();
 		InterfazJuegoPokemon interfaz = new InterfazJuegoPokemon();
 		//String player="Player";

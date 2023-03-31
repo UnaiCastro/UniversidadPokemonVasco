@@ -14,6 +14,10 @@ public class ListaJugadores {
 		return this.lJugadores.iterator();
 	}
 	
+	public ArrayList<SuperJugador> getMisJugadores(){
+		return this.lJugadores;
+	}
+	
 	public Jugador getJugador() {
 		Iterator<SuperJugador> itr = this.getIterador();
 		while (itr.hasNext()) {
@@ -40,16 +44,27 @@ public class ListaJugadores {
 		return this.lJugadores.size();
 	}
 	
+//	public ListaJugadores getListaJugadores(){
+//		Iterator<SuperJugador> itr = this.getIterador();
+//		ListaJugadores lista= new ListaJugadores();
+//		while (itr.hasNext()) {
+//			SuperJugador act=itr.next();
+//			
+//		}
+//		return lista;
+//	}
+
+	
 	
 	public void registrar(int numPlayers, int numNPCs, int numPokemon) {
-		System.out.println("Ha llegado la llmada a ListaJugadores");
+		//System.out.println("Ha llegado la llmada a ListaJugadores");
 		for(int i=0;i<numNPCs;i++) {
 			int num=i+1;
 			String nombre="NPC"+" " +num;
 			NPC npc= new NPC();
 			this.lJugadores.add(npc);
 			//System.out.println("Se ha añadido:"+" "+nombre);
-			npc.setNombre(nombre);
+			//npc.setNombre(nombre);
 			npc.añadirPokemons(numPokemon);
 		}
 		for(int i=0;i<numPlayers;i++) {
@@ -58,12 +73,33 @@ public class ListaJugadores {
 			Jugador jugador= new Jugador();
 			this.lJugadores.add(jugador);
 			//System.out.println("Se ha añadido:"+" "+nombre);
-			jugador.setNombre(nombre);
+			//jugador.setNombre(nombre);
 			jugador.añadirPokemons(numPokemon);
 		}
-		int jug= this.getSize();
+		//int jug= this.getSize();
 		//System.out.println("Hay"+" "+jug+" ");
 		
 	}
+
+	public void decirNombres() {
+		Iterator<SuperJugador> itr = this.getIterador();
+		while (itr.hasNext()) {
+			SuperJugador act = itr.next();
+			//System.out.println("Hola soy : "+act.getNombre());
+		}
+	}
+
+	public void verPokemons() {
+		Iterator<SuperJugador> itr = this.getIterador();
+		while (itr.hasNext()) {
+			SuperJugador act = itr.next();
+			//System.out.println("Hola soy : "+act.getNombre()+" y tengo "+act.equipoPokemon.getTamanoEquipo());
+		}
+	}
+	
+	public SuperJugador getSuperJugadorPosicion(int i) {
+		return this.lJugadores.get(i);
+	}
+	
 	
 }
