@@ -53,9 +53,13 @@ public class GestorJuegoPokemon extends Observable{
 		
 	}
 
-	public void accionarAtaque(SuperJugador jugador2, Pokemon pokemon2, Pokemon pokemon) {
-		this.jugadores.buscarYAtacar(jugador2,pokemon2,pokemon);
+	public void accionarAtaque(String jugador2, int pokemon2, String jugador1, int pokemon1) {
+		this.jugadores.buscarYAtacar(jugador2,pokemon2,jugador1,pokemon1);
 		
+	}
+
+	public boolean mirarTurno(String player) {
+		return this.jugadores.mirarTurno(player);
 	}
 	
 }

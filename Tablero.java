@@ -1,31 +1,40 @@
 package Modelo;
 
 public class Tablero {
-	private Pokemon pokemon1;
-	private Pokemon pokemon2;
-	private SuperJugador jugador;
-	private SuperJugador jugador2;
+	private int pokemon1;
+	private int pokemon2;
+	private String jugador1;
+	private String jugador2;
 	private static Tablero mTablero;
 	
 	private Tablero() {
-		this.jugador=null;
-		this.jugador2=null;
-		this.pokemon1=null;
-		this.pokemon2=null;
+		
 	}
 	
-	public Tablero getMiTablero() {
+	public static Tablero getMiTablero() {
 		Tablero mTablero =new Tablero();
 		if (Tablero.mTablero==null) {
 			Tablero.mTablero=mTablero;
 		}
 		return Tablero.mTablero;
 	}
-	public void añadirPokemon(Pokemon pPokemon, SuperJugador pJugador) {
-		if (this.jugador!=null) {
-			this.jugador2=pJugador;
-			this.pokemon2=pPokemon;
-			GestorJuegoPokemon.getMiGestorJuegoPokemon().accionarAtaque(this.jugador2,this.pokemon2,this.pokemon1);
+	public void añadirPokemon(int i,String pPlayer) {
+		if (this.jugador1!=null) {
+			System.out.println("Vamos a atacar");
+			this.jugador2=pPlayer;
+			this.pokemon2=i;
+			System.out.println("Vamos a Gestor");
+			GestorJuegoPokemon.getMiGestorJuegoPokemon().accionarAtaque(jugador2, pokemon2, jugador1, pokemon1);
+		} else {
+			System.out.println("Esperamos tu eleccion");
+			this.jugador1=pPlayer;
+			this.pokemon1=i;
 		}
 	}
+
+	public boolean mirarTurno(String player) {
+		return GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarTurno(player);
+		
+	}
+	
 }

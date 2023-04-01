@@ -5,10 +5,12 @@ import javax.xml.soap.Text;
 
 import Modelo.Equipo;
 import Modelo.GestorJuegoPokemon;
+import Modelo.Tablero;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
@@ -22,7 +24,8 @@ public class InterfazJugador extends JFrame implements Observer {
     private JLabel playerImageLabel;
     private JLabel[] pokemonImageLabels;
     private ControlerJugador miControlador;
-
+    private JButton botonPokemon; 
+//    private ArrayList<JButton> lbotonPokemon;
    
     
     
@@ -67,7 +70,9 @@ public class InterfazJugador extends JFrame implements Observer {
         int posicionPokemonX = 320;
         int posicionPokemonY = 50;
         
+        
         for (int i = 0; i < numPokemon; i++) {  
+        	String[] infoPokemon = {"Ataque: "+pEquipo.getPokemon(i).getAtaque(),"Defensa: "+pEquipo.getPokemon(i).getDefensa(), "Vida: "+pEquipo.getPokemon(i).getVida(), "Tipo: "+pEquipo.getPokemon(i).getTipo()};
         	Random rand1 = new Random();
             int minimo1 = 1;
             int maximo1 = 5;
@@ -79,31 +84,29 @@ public class InterfazJugador extends JFrame implements Observer {
             panelPrincipal.add(labelImagenPokemon);
 
             // Creamos el botón debajo de la imagen del pokemon
-            String info ="Ataque: "+pEquipo.getPokemon(i).getAtaque()+"\nDefensa: "+pEquipo.getPokemon(i).getDefensa()+"\nVida: "+pEquipo.getPokemon(i).getVida()+"\n Tipo: "+pEquipo.getPokemon(i).getTipo();
-            JLabel informacionLabel = new JLabel(info);
-            informacionLabel.setBounds(posicionPokemonX, posicionPokemonY +10, 300, 30);
-            panelPrincipal.add(informacionLabel);
+//            String info ="Ataque: "+pEquipo.getPokemon(i).getAtaque()+"\nDefensa: "+pEquipo.getPokemon(i).getDefensa()+"\nVida: "+pEquipo.getPokemon(i).getVida()+"\n Tipo: "+pEquipo.getPokemon(i).getTipo();
+//            JLabel informacionLabel = new JLabel(info);
+//            informacionLabel.setBounds(posicionPokemonX, posicionPokemonY +10, 300, 30);
+//            panelPrincipal.add(informacionLabel);
 //          add(informacionLabel);
-            JButton botonPokemon = new JButton("Ataca!");          
+            this.botonPokemon = new JButton("Ataca!"+" "+(i+1));          
             botonPokemon.setBounds(posicionPokemonX, posicionPokemonY + 350, 250, 30);
             panelPrincipal.add(botonPokemon);
+           
+//            this.lbotonPokemon.add(botonPokemon);
+            this.botonPokemon.addActionListener(getMiControlador());
 //          labelImagenPokemon.setText(info);
+            
+          //Agregar información encima de la foto del pokemon
+            JLabel infoPokemonLabel = new JLabel();
+            infoPokemonLabel.setBounds(300 + 250*i, 10, 250, 30);
+            for(String info1 : infoPokemon) {
+                infoPokemonLabel.setText(infoPokemonLabel.getText() + info1 + "\n");
+                panelPrincipal.add(infoPokemonLabel);
+            }
 
             posicionPokemonX += 250;
         }
-
-        // Creamos los botones debajo de las imágenes de los pokemons
-//        JButton boton1 = new JButton("Botón 1");
-//        boton1.setBounds(320, 410, 100, 30);
-//        panelPrincipal.add(boton1);
-//
-//        JButton boton2 = new JButton("Botón 2");
-//        boton2.setBounds(430, 410, 100, 30);
-//        panelPrincipal.add(boton2);
-//
-//        JButton boton3 = new JButton("Botón 3");
-//        boton3.setBounds(540, 410, 100, 30);
-//        panelPrincipal.add(boton3);
 
         setSize(320 + numPokemon * 250, 540);
         setLocationRelativeTo(null);
@@ -127,26 +130,40 @@ public class InterfazJugador extends JFrame implements Observer {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
+			if (arg0.getSource().equals(botonPokemon)){
+				String player=getName();
+				int i=0;
+				boolean puede=Tablero.getMiTablero().mirarTurno(player);
+				if (puede==true) {
+					Tablero.getMiTablero().añadirPokemon(i,player);
+
+				}else {
+					System.out.println("No puedes jugar, no es tu turno");
+				}
+			}
 			
 		}
 	}
 
-    private void setImages(String playerName, int numPokemon) {
-        Random random = new Random();
-        int playerImageIndex = random.nextInt(3) + 1;
-        playerImageLabel.setIcon(new ImageIcon("player" + playerImageIndex + ".png"));
-
-        int[] pokemonImageIndices = new int[numPokemon];
-        for (int i = 0; i < numPokemon; i++) {
-            pokemonImageIndices[i] = random.nextInt(3) + 1;
-            pokemonImageLabels[i].setIcon(new ImageIcon("pokemon" + pokemonImageIndices[i] + ".png"));
-        }
-    }
+//    private void setImages(String playerName, int numPokemon) {
+//        Random random = new Random();
+//        int playerImageIndex = random.nextInt(3) + 1;
+//        playerImageLabel.setIcon(new ImageIcon("player" + playerImageIndex + ".png"));
+//
+//        int[] pokemonImageIndices = new int[numPokemon];
+//        for (int i = 0; i < numPokemon; i++) {
+//            pokemonImageIndices[i] = random.nextInt(3) + 1;
+//            pokemonImageLabels[i].setIcon(new ImageIcon("pokemon" + pokemonImageIndices[i] + ".png"));
+//        }
+//    }
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public String getName() {
+		return this.playerName;
 	}
     
 }

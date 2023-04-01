@@ -5,6 +5,7 @@ import java.util.Observable;
 public abstract class SuperJugador extends Observable{
 	protected Equipo equipoPokemon;
 	protected String nombre;
+	protected boolean turno;
 	
 	//public abstract void añadirPokemons(String pNombre, int numPokemon);
 	public Equipo getMiEquipo() {

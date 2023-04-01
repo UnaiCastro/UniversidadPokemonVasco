@@ -44,18 +44,6 @@ public class ListaJugadores {
 		return this.lJugadores.size();
 	}
 	
-//	public ListaJugadores getListaJugadores(){
-//		Iterator<SuperJugador> itr = this.getIterador();
-//		ListaJugadores lista= new ListaJugadores();
-//		while (itr.hasNext()) {
-//			SuperJugador act=itr.next();
-//			
-//		}
-//		return lista;
-//	}
-
-	
-	
 	public void registrar(int numPlayers, int numNPCs, int numPokemon) {
 		System.out.println("Ha llegado la llmada a ListaJugadores");
 		for(int i=0;i<numNPCs;i++) {
@@ -72,6 +60,10 @@ public class ListaJugadores {
 			String nombre="Jugador"+" " +num;
 			Jugador jugador= new Jugador(nombre);
 			this.lJugadores.add(jugador);
+			if (jugador.getNombre().equals("Jugador 1")){
+				Boolean pTurno=true;
+				jugador.setTurno(pTurno);
+			}					
 			System.out.println("Se ha añadido:"+" "+jugador.getNombre());
 			//jugador.setNombre(nombre);
 			jugador.añadirPokemons(numPokemon);
@@ -99,9 +91,18 @@ public class ListaJugadores {
 		return this.lJugadores.get(i);
 	}
 
-	public void buscarYAtacar(SuperJugador jugador2, Pokemon pokemon2, Pokemon pokemon) {
+	public void buscarYAtacar(String jugador2, int pokemon2, String jugador1, int pokemon1) {
+		//HACER
 		
+	}
+
+	public boolean mirarTurno(String player) {
+		return this.buscarJuagdor(player);
 		
+	}
+
+	private boolean buscarJuagdor(String player) {
+		return false;
 	}
 	
 	

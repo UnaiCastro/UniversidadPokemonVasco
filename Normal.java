@@ -12,7 +12,6 @@ public class Normal extends Pokemon {
 
 	@Override
 	public String getTipo() {
-		// TODO Auto-generated method stub
 		return this.tipo;
 	}
 }

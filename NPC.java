@@ -9,16 +9,12 @@ public class NPC extends SuperJugador{
 		this.nombre= pNombre;
 	}
 	
-//	public void añadirPokemons(String pNombre, int numPokemon) {
-//		this.equipoPokemon.
-//	}
-	//public String getNombre() {
-		//return this.nombre;
-	//}
+	public void setNombre(String pJugador) {
+		this.nombre=pJugador;
+	}
 	
-	//public void setNombre(String pNombre) {
-		//this.nombre=pNombre;
-	//}
-	
+	public void setTurno(Boolean pTurno) {
+		this.turno=pTurno;
+	}
 
 }
