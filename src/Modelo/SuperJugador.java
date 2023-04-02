@@ -8,14 +8,14 @@ public abstract class SuperJugador extends Observable{
 	protected boolean turno;
 	private boolean defeated = false;
 	
-	//public abstract void añadirPokemons(String pNombre, int numPokemon);
+	//public abstract void aï¿½adirPokemons(String pNombre, int numPokemon);
 	public Equipo getMiEquipo() {
 		return this.equipoPokemon;
 	}
 	
-	public void añadirPokemons(int numPokemons)
+	public void aÃ±adirPokemons(int numPokemons)
 	{
-		//this.añadirNombre(pNombre);
+		//this.aï¿½adirNombre(pNombre);
 		System.out.println("Creando pokemons de:"+this.nombre);
 		this.equipoPokemon.anadirPokemon(numPokemons);
 		
