@@ -44,9 +44,9 @@ public class InterfazJugador extends JFrame implements Observer {
 		inicializar(playerName, numPokemon,pEquipo);
 		setVisible(true);
 		if (playerName.equals("Jugador")) {
-			//Añadir
+			//AÃ±adir
 		}else {
-			//Añadir Observer NPC
+			//AÃ±adir Observer NPC
 		}
 		//GestorJuegoPokemon.getMiGestorJuegoPokemon().addObserver(this);
 	}
@@ -62,7 +62,7 @@ public class InterfazJugador extends JFrame implements Observer {
         panelPrincipal.setLayout(null);
         getContentPane().add(panelPrincipal);
 
-        // Creamos el botón en la esquina superior izquierda
+        // Creamos el botÃ³n en la esquina superior izquierda
         this.btnSwitchX = new JButton("Turno");
         btnSwitchX.setBounds(10, 10, 100, 30);
         panelPrincipal.add(btnSwitchX);
@@ -73,12 +73,12 @@ public class InterfazJugador extends JFrame implements Observer {
         int minimo = 0;
         int maximo = 5;
         int numeroAleatorio = rand.nextInt((maximo - minimo) + 1) + minimo;
-        ImageIcon imagenJugador = new ImageIcon("C:/Users/kasme/OneDrive/Escritorio/Pokemon_Fotos/Jugadores/trainer"+(numeroAleatorio)+".png");
+        ImageIcon imagenJugador = new ImageIcon("src/Sprites/trainer"+(numeroAleatorio)+".png");
         JLabel labelImagenJugador = new JLabel(imagenJugador);
         labelImagenJugador.setBounds(10, 50, 300, 350);
         panelPrincipal.add(labelImagenJugador);
 
-        // Creamos las imágenes de los pokemons
+        // Creamos las imÃ¡genes de los pokemons
         int posicionPokemonX = 320;
         int posicionPokemonY = 50;
         
@@ -90,7 +90,7 @@ public class InterfazJugador extends JFrame implements Observer {
             int maximo1 = 5;
             int numeroAleatorio1 = rand1.nextInt((maximo1 - minimo1) + 1) + minimo1;
             System.out.println(numeroAleatorio1);
-            ImageIcon imagenPokemon = new ImageIcon("C:/Users/kasme/OneDrive/Escritorio/Pokemon_Fotos/Pokemons/Pokemon" + (numeroAleatorio1) + ".png");
+            ImageIcon imagenPokemon = new ImageIcon("src/Sprites/Pokemon" + (numeroAleatorio1) + ".png");
             JLabel labelImagenPokemon = new JLabel(imagenPokemon);
             labelImagenPokemon.setBounds(posicionPokemonX, posicionPokemonY, 250, 350);
             panelPrincipal.add(labelImagenPokemon);
@@ -109,7 +109,7 @@ public class InterfazJugador extends JFrame implements Observer {
             panelPrincipal.add(atacarPoke);
             atacarPoke.addActionListener(getMiControlador());
             
-          //Agregar información encima de la foto del pokemon
+          //Agregar informaciÃ³n encima de la foto del pokemon
             JLabel infoPokemonLabel = new JLabel();
             infoPokemonLabel.setBounds(300 + 250*i, 10, 250, 30);
             for(String info1 : infoPokemon) {
