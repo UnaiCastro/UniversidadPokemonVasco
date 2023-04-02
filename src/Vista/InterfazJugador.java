@@ -51,6 +51,7 @@ public class InterfazJugador extends JFrame implements Observer {
 		//GestorJuegoPokemon.getMiGestorJuegoPokemon().addObserver(this);
 	}
     private void inicializar(String playerName, int numPokemon, Equipo pEquipo) {
+    	this.numPokemon=numPokemon;
     	this.playerName=playerName;
     	setTitle(playerName);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,9 +63,10 @@ public class InterfazJugador extends JFrame implements Observer {
         getContentPane().add(panelPrincipal);
 
         // Creamos el botón en la esquina superior izquierda
-        JButton boton = new JButton("Turno");
-        boton.setBounds(10, 10, 100, 30);
-        panelPrincipal.add(boton);
+        this.btnSwitchX = new JButton("Turno");
+        btnSwitchX.setBounds(10, 10, 100, 30);
+        panelPrincipal.add(btnSwitchX);
+        btnSwitchX.addMouseListener(getMiControlador());
 
         // Creamos la imagen del jugador
         Random rand = new Random();
@@ -101,6 +103,7 @@ public class InterfazJugador extends JFrame implements Observer {
 //            this.cpList.add(cp);
 //            
             JButton atacarPoke = new JButton("Ataca!"+" "+(i+1)); 
+            atacarPoke.setName("Boton" +(i+1));
             this.lBotonPokemon.add(atacarPoke);
             atacarPoke.setBounds(posicionPokemonX, posicionPokemonY + 350, 250, 30);
             panelPrincipal.add(atacarPoke);
@@ -140,9 +143,12 @@ public class InterfazJugador extends JFrame implements Observer {
 		public void actionPerformed(ActionEvent arg0) {
 			int ind=0;
 			boolean enc=false;
-			while(ind<InterfazJugador.this.lBotonPokemon.size()&& !(enc) && GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarTurno(getName()) ){
-//				if (arg0.getSource().equals(InterfazJugador.this.lBotonPokemon.get(ind))) && GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarTurno(getName()) && !(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName())instanceof Modelo.NPC) {
-				if (arg0.getSource().equals(InterfazJugador.this.lBotonPokemon.get(ind)) &&  !(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()) instanceof Modelo.NPC)) { 	
+			System.out.println(" Datos "+ ind+" "+enc+ " "+ GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarTurno(getName()) );
+			while(ind<InterfazJugador.this.lBotonPokemon.size()&& !(enc)  ){
+				JButton b = (JButton) arg0.getSource();
+				System.out.println(InterfazJugador.this.lBotonPokemon.get(ind).getName());
+				if (b.getName().equals(InterfazJugador.this.lBotonPokemon.get(ind).getName()) &&  !(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()) instanceof Modelo.NPC)&& GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarTurno(getName())) { 	
+					
 					enc=true;
 					System.out.println("Has entrado en lo importante");
 					Tablero.getMiTablero().setJugadorAtacante(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName));
@@ -150,13 +156,14 @@ public class InterfazJugador extends JFrame implements Observer {
 			        System.out.println("Jugador Atacante " + GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName).getNombre()+ "  "+GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind).getNombre());
 					
 					
-				}else {
+				}else if((GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()) instanceof Modelo.NPC) && (b.getName().equals(InterfazJugador.this.lBotonPokemon.get(ind).getName()))){
 					Tablero.getMiTablero().setDefendsPlayer(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName));
 					Tablero.getMiTablero().setDefensaPokemon(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind));
 					System.out.println("Jugador Defensor " + GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName).getNombre()+ "  "+GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind).getNombre());
 			        Tablero.getMiTablero().atacar();
-					
+			        enc=true;
 				}
+				
 				ind++;
 
 			}
@@ -164,7 +171,38 @@ public class InterfazJugador extends JFrame implements Observer {
 		}
 
 		@Override
-		public void mouseClicked(MouseEvent arg0) {}
+		public void mouseClicked(MouseEvent arg0) {
+			if (arg0.getSource().equals(btnSwitchX)) {
+				boolean enc=false;
+				int iJugador=0;
+				while (!enc) {
+					Random rand1 = new Random();
+		            int minimo1 = 1;
+		            int maximo1 = GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().getSize();
+		            int numeroAleatorio1 = rand1.nextInt((maximo1 - minimo1) + 1) + minimo1;
+		            if (!GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().getSuperJugadorPosicion(numeroAleatorio1-1).getNombre().equals(getName())) {
+		            	enc=true;
+		            	iJugador=numeroAleatorio1-1;
+		            	
+		            }
+		            
+				}
+				Random rand1 = new Random();
+	            int minimo1 = 1;
+	            int maximo1 = InterfazJugador.this.numPokemon;
+	            int numeroAleatorio1 = rand1.nextInt((maximo1 - minimo1) + 1) + minimo1;
+	            Random rand2 = new Random();
+	            int minimo2 = 1;
+	            int maximo2 = InterfazJugador.this.numPokemon;
+	            int numeroAleatorio2 = rand2.nextInt((maximo2 - minimo2) + 1) + minimo2;
+	            Tablero.getMiTablero().setJugadorAtacante(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName));
+				Tablero.getMiTablero().setAtacantePokemon(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName).getMiEquipo().getPokemon(numeroAleatorio1-1));
+				Tablero.getMiTablero().setDefendsPlayer(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().getSuperJugadorPosicion(iJugador).getNombre()));
+				Tablero.getMiTablero().setDefensaPokemon(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().getSuperJugadorPosicion(iJugador).getNombre()).getMiEquipo().getPokemon(numeroAleatorio2-1));
+				System.out.println("Jugador Defensor "+Tablero.getMiTablero().getJugador2().getNombre()+" Jugador Atacante "+Tablero.getMiTablero().getJugador1().getNombre()+" Pokemon Defensor "+Tablero.getMiTablero().getPokemon2().getNombre()+" Pokemon Atacante"+Tablero.getMiTablero().getPokemon1().getNombre());
+				Tablero.getMiTablero().atacar();
+			}
+		}
 			
 
 		@Override
