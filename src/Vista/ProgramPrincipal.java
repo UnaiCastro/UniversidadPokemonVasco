@@ -1,9 +1,6 @@
 package Vista;
 
 import Modelo.GestorJuegoPokemon;
-import Modelo.Jugador;
-import Vista.InterfazJuegoPokemon;
-import Vista.InterfazJugador;
 
 public class ProgramPrincipal {
 	public static void main(String[] args) {
