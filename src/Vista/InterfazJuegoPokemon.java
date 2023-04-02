@@ -71,7 +71,7 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 	        JPanel imagePanel = new JPanel();
 	        try {
 	            JLabel imageLabel = new JLabel();
-	            Image image = ImageIO.read(new File("C:/Users/kasme/OneDrive/Escritorio/Pokemon_Fotos/main.png"));
+	            Image image = ImageIO.read(new File("src/Sprites/main.png"));
 	            Image scaledImage = image.getScaledInstance(800, 400, Image.SCALE_SMOOTH);
 	            ImageIcon icon = new ImageIcon(scaledImage);
 	            imageLabel.setIcon(icon);
@@ -80,7 +80,7 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 	            e.printStackTrace();
 	        }
 
-	        // Panel de los campos y botón
+	        // Panel de los campos y botÃ³n
 	        JPanel fieldsPanel = new JPanel();
 	        fieldsPanel.setLayout(new BoxLayout(fieldsPanel, BoxLayout.Y_AXIS));
 
@@ -98,7 +98,7 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 	        npcsPanel.add(Box.createRigidArea(new Dimension(10, 0)));
 	        npcsPanel.add(npcsField);
 
-	        JLabel pokemonLabel = new JLabel("Pokémon:");
+	        JLabel pokemonLabel = new JLabel("PokÃ©mon:");
 	        pokemonField = new JTextField(10);
 	        JPanel pokemonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 	        pokemonPanel.add(pokemonLabel);
