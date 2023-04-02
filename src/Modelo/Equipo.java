@@ -59,6 +59,7 @@ public class Equipo {
 			if (this.lPokemon.get(ind).equals(pokemon2)) {
 				indF=ind;
 			}
+			ind++;
 		}
 		return indF;
 	}

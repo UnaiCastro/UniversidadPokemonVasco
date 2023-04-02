@@ -39,7 +39,7 @@ public abstract class Pokemon {
 	}
 
 	public void bajarVida(int vida2) {
-		this.vida=this.vida-vida2;
+		this.vida=vida2;
 		
 	}
 	

@@ -126,7 +126,27 @@ public class ListaJugadores {
 		
 	}
 
-//	private boolean buscarJuagdor(String player) {
+	public void cambiarTurno(SuperJugador pJugador) {
+		Iterator<SuperJugador> itr=this.getIterador();
+		int ind=0;
+		for (int i=0;i<this.lJugadores.size();i++){
+			SuperJugador act=itr.next();
+			if (act.getNombre().equals(pJugador.getNombre())) {
+				ind=i;
+				this.lJugadores.get(i).setTurno(false);
+				break;
+			}
+		}
+		ind=ind+1;
+		if (ind==this.lJugadores.size()) {
+			ind=0;
+			this.lJugadores.get(ind).setTurno(true);
+		}else {
+			this.lJugadores.get(ind).setTurno(true);
+		}
+	}
+
+//	private boo0lean buscarJuagdor(String player) {
 //		return false;
 //	}
 	

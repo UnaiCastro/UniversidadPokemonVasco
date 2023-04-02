@@ -72,4 +72,8 @@ public class GestorJuegoPokemon extends Observable{
 		return null;
 	}
 	
+	public ListaJugadores getLista() {
+		return this.jugadores;
+	}
+	
 }

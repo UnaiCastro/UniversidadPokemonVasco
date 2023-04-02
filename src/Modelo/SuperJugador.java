@@ -28,6 +28,10 @@ public abstract class SuperJugador extends Observable{
 	public String getNombre() {
 		return this.nombre;
 	}
+	
+	public void setTurno(boolean pBoolean) {
+		this.turno=pBoolean;
+	}
 
 	public Pokemon getPokemon(int ind) {
 		return this.equipoPokemon.getPokemon(ind);
