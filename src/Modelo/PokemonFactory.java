@@ -32,6 +32,6 @@ public class PokemonFactory {
 		else {
 			return new Electrico(pNombre);
 		}
-	}
+	}//
 
 }

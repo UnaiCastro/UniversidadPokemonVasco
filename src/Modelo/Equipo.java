@@ -12,11 +12,11 @@ public class Equipo {
 	
 	public int getTamanoEquipo() {
 		return this.lPokemon.size();
-	}
+	}//
 	
 	private Iterator<Pokemon> getIterador(){
 		return this.lPokemon.iterator();
-	}
+	}//
 	
 	public void anadirPokemon(int nPokemon){
 		//this.lPokemon.add(pPokemon);
@@ -28,14 +28,14 @@ public class Equipo {
 		}
 		this.comprobarLista();
 		
-	}
+	}//
 	public void comprobarLista() {
 		Iterator<Pokemon> itr=this.getIterador();
 		while (itr.hasNext()) {
 			Pokemon act =itr.next();
 			System.out.println("Hola soy :"+act.getNombre()+"y soy de tipo "+act.tipo+" y tengo estas caracteristicas: Ataque "+act.ataque+" Defensa: "+act.defensa+" y Vida: "+act.vida);
 		}
-	}
+	}//
 
 	public Pokemon getPokemon(int lugarPokemon) {
 		return this.lPokemon.get(lugarPokemon);
@@ -78,5 +78,5 @@ public class Equipo {
 		}else {
 			System.out.println("Se acabo la partida, Enhorabuena");
 		}
-	}
+	}//
 }

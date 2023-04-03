@@ -12,11 +12,11 @@ public class ListaJugadores {
 	
 	private Iterator<SuperJugador> getIterador(){
 		return this.lJugadores.iterator();
-	}
+	}//
 	
 	public ArrayList<SuperJugador> getMisJugadores(){
 		return this.lJugadores;
-	}
+	}//
 	
 	public Jugador getJugador() {
 		Iterator<SuperJugador> itr = this.getIterador();
@@ -45,15 +45,15 @@ public class ListaJugadores {
 	}
 	
 	public void registrar(int numPlayers, int numNPCs, int numPokemon) {
-		System.out.println("Ha llegado la llmada a ListaJugadores");
+		//System.out.println("Ha llegado la llamada a ListaJugadores");
 		for(int i=0;i<numNPCs;i++) {
 			int num=i+1;
 			String nombre="NPC"+" " +num;
 			NPC npc= new NPC(nombre);
 			this.lJugadores.add(npc);
-			System.out.println("Se ha aÃ±adido:"+" "+npc.getNombre());
+			//System.out.println("Se ha añadido:"+" "+npc.getNombre());
 			//npc.setNombre(nombre);
-			npc.aÃ±adirPokemons(numPokemon);
+			npc.añadirPokemons(numPokemon);
 		}
 		for(int i=0;i<numPlayers;i++) {
 			int num=i+1;
@@ -64,11 +64,11 @@ public class ListaJugadores {
 				Boolean pTurno=true;
 				jugador.setTurno(pTurno);
 			}					
-			System.out.println("Se ha aÃ±adido:"+" "+jugador.getNombre());
-			jugador.aÃ±adirPokemons(numPokemon);
+			//System.out.println("Se ha añadido:"+" "+jugador.getNombre());
+			jugador.añadirPokemons(numPokemon);
 		}
 		
-	}
+	}//
 
 	public void decirNombres() {
 		Iterator<SuperJugador> itr = this.getIterador();
@@ -107,20 +107,6 @@ public class ListaJugadores {
 			}
 		}
 		return aux.turno;
-		
-	}
-	public SuperJugador getJugadorTurno() {
-		Iterator<SuperJugador> itr=this.getIterador();
-		SuperJugador aux=null;
-		while(itr.hasNext()) {
-			SuperJugador act=itr.next();
-			if (act.turno){
-				
-				aux=act;
-				
-			}
-		}
-		return aux;
 		
 	}
 

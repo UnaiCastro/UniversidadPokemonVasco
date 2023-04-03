@@ -32,48 +32,48 @@ public class Tablero {
 //		}
 //	}
 
-	public boolean mirarTurno(String player) {
-		return GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarTurno(player);
-		
-	}
+//	public boolean mirarTurno(String player) {
+//		return GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarTurno(player);
+//		
+//	}
 
 	public void setJugadorAtacante(SuperJugador nombrePlayer) {
 		this.jugador1=nombrePlayer;
 		
-	}
+	}//
 
 	public void setAtacantePokemon(Pokemon pPokemon) {
 		this.pokemon1=pPokemon;
 		
-	}
+	}//
 
 	public void setDefendsPlayer(SuperJugador pJugador) {
 		this.jugador2=pJugador;
 		
-	}
+	}//
 
 	public void setDefensaPokemon(Pokemon pokemon) {
 		this.pokemon2=pokemon;
 		
-	}
+	}//
 	
 	public SuperJugador getJugador1() {
 		return this.jugador1;
-	}
+	}//
 	
 
 	public Pokemon getPokemon1() {
 		return pokemon1;
-	}
+	}//
 
 
 	public Pokemon getPokemon2() {
 		return pokemon2;
-	}
+	}//
 
 	public SuperJugador getJugador2() {
 		return jugador2;
-	}
+	}//
 
 
 	public void atacar() {
@@ -89,10 +89,6 @@ public class Tablero {
 			GestorJuegoPokemon.getMiGestorJuegoPokemon().comprobarVictoria(jugador2);
 		}
 		
-	}
-	
-//	public void cambiarTurno(SuperJugador pJugador) {
-//		GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().cambiarTurno(pJugador);
-//	}
-	
+	}//
+		
 }
