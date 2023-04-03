@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
-import java.io.File;
-import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -39,7 +37,6 @@ public class InterfazJugador extends JFrame implements Observer {
     private ControlerJugador miControlador;
 //    private JButton botonPokemon; 
     private JButton btnCambioX;
-    private HashMap<Integer, String> pokedex;
 
    
     
@@ -47,7 +44,6 @@ public class InterfazJugador extends JFrame implements Observer {
     public InterfazJugador (String playerName, int numPokemon, Equipo pEquipo) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		inicializar(playerName, numPokemon,pEquipo);
-	        setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 		GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(playerName).addObserver(this);
 	}
@@ -63,7 +59,7 @@ public class InterfazJugador extends JFrame implements Observer {
         this.mainPanel.setLayout(null);
         getContentPane().add(this.mainPanel);
 
-        // Creamos el botÃ³n en la esquina superior izquierda
+        // Creamos el botón en la esquina superior izquierda
         this.btnCambioX = new JButton();
         btnCambioX.setBounds(10, 10, 100, 30);
         boolean k=GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarTurno(playerName);
@@ -82,27 +78,14 @@ public class InterfazJugador extends JFrame implements Observer {
         int minimo = 0;
         int maximo = 5;
         int numeroAleatorio = rand.nextInt((maximo - minimo) + 1) + minimo;
-        ImageIcon imagenJugador = new ImageIcon("src/Sprites/trainer"+(numeroAleatorio)+".png");
+        ImageIcon imagenJugador = new ImageIcon("C:/Users/kasme/OneDrive/Escritorio/Pokemon_Fotos/Jugadores/trainer"+(numeroAleatorio)+".png");
 //        JLabel labelImagenJugador = new JLabel(imagenJugador);
         this.playerImageLabel.setIcon(imagenJugador);
 //        labelImagenJugador.setBounds(10, 50, 300, 350);
         this.playerImageLabel.setBounds(10, 50, 300, 350);
         this.mainPanel.add(this.playerImageLabel);
-	 // inicializamos la pokedex
-	this.pokedex = new HashMap<Integer,String>();
-	File dir = new File("src/Sprites");
-	File[] files = dir.listFiles();
-	int j = 1;
-	for (File file : files) {
-		if (!file.getName().contains("trainer") && !file.getName().equals("main.png")){
-			String nfile = file.getName();
-			System.out.println(nfile);
-			pokedex.put(j, nfile);
-			j++;
-		}
-	}
 
-        // Creamos las imÃ¡genes de los pokemons
+        // Creamos las imágenes de los pokemons
         int posicionPokemonX = 320;
         int posicionPokemonY = 50;
         
@@ -114,10 +97,8 @@ public class InterfazJugador extends JFrame implements Observer {
             int maximo1 = 5;
             int numeroAleatorio1 = rand1.nextInt((maximo1 - minimo1) + 1) + minimo1;
             System.out.println(numeroAleatorio1);
-	    int randNumPokedex = rand.nextInt(pokedex.size() + 1);
-	    String randomPokemon = pokedex.get(randNumPokedex);
-            ImageIcon imagenPokemon = new ImageIcon("src/Sprites/" + randomPokemon);
-	    JLabel labelImagenPokemon = new JLabel(imagenPokemon);
+            ImageIcon imagenPokemon = new ImageIcon("C:/Users/kasme/OneDrive/Escritorio/Pokemon_Fotos/Pokemons/Pokemon" + (numeroAleatorio1) + ".png");
+            JLabel labelImagenPokemon = new JLabel(imagenPokemon);
             labelImagenPokemon.setBounds(posicionPokemonX, posicionPokemonY, 250, 350);
             this.mainPanel.add(labelImagenPokemon);
                       
@@ -128,7 +109,7 @@ public class InterfazJugador extends JFrame implements Observer {
             this.mainPanel.add(atacarPoke);
             atacarPoke.addActionListener(getMiControlador());
             
-          //Agregar informaciÃ³n encima de la foto del pokemon
+          //Agregar información encima de la foto del pokemon
             JLabel infoPokemonLabel = new JLabel();
             infoPokemonLabel.setBounds(300 + 250*i, 50, 250, 50);
             this.listaInfor.add(infoPokemonLabel);
@@ -169,20 +150,26 @@ public class InterfazJugador extends JFrame implements Observer {
 				JButton b = (JButton) arg0.getSource();
 //				System.out.println(InterfazJugador.this.lBotonPokemon.get(ind).getName());
 				if (b.getName().equals(InterfazJugador.this.lBotonPokemon.get(ind).getName()) &&  !(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()) instanceof Modelo.NPC)&& GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarTurno(getName())) { 	
-					
-					enc=true;
-					System.out.println("Has entrado en lo importante");
-					Tablero.getMiTablero().setJugadorAtacante(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName));
-					Tablero.getMiTablero().setAtacantePokemon(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind));
-			        System.out.println("Jugador Atacante " + GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName).getNombre()+ "  "+GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind).getNombre());
-					
+					if(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind).getVida()!=0) {
+						enc=true;
+						System.out.println("Has entrado en lo importante");
+						Tablero.getMiTablero().setJugadorAtacante(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName));
+						Tablero.getMiTablero().setAtacantePokemon(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind));
+						System.out.println("Jugador Atacante " + GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName).getNombre()+ "  "+GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind).getNombre());
+					}else {
+						System.out.println("Este Pokemon ha muerto, elige otro");
+					}
 					
 				}else if((GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()) instanceof Modelo.NPC) && (b.getName().equals(InterfazJugador.this.lBotonPokemon.get(ind).getName()))){
+					if (GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind).getVida()!=0) {
 					Tablero.getMiTablero().setDefendsPlayer(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName));
 					Tablero.getMiTablero().setDefensaPokemon(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind));
 					System.out.println("Jugador Defensor " + GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName).getNombre()+ "  "+GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind).getNombre());
 			        Tablero.getMiTablero().atacar();
 			        enc=true;
+					}else {
+						System.out.println("Este Pokemon ya le has derrotado, busca otro");
+					}
 				}else if (b.getName().equals(InterfazJugador.this.lBotonPokemon.get(ind).getName()) &&  !(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()) instanceof Modelo.NPC)&& !GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarTurno(getName())) {
 					Tablero.getMiTablero().setDefendsPlayer(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName));
 					Tablero.getMiTablero().setDefensaPokemon(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind));
@@ -259,7 +246,7 @@ public class InterfazJugador extends JFrame implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof Jugador || o instanceof NPC) {
-	        // Obtener el objeto jugador o NPC que enviÃ³ la actualizaciÃ³n
+	        // Obtener el objeto jugador o NPC que envió la actualización
 	        Object jugadorNPC = o;
 	        boolean turno = false;
 	        
@@ -271,7 +258,7 @@ public class InterfazJugador extends JFrame implements Observer {
 	            turno = ((NPC) jugadorNPC).getTurno();
 	        }
 	        
-	        // Cambiar el color del botÃ³n segÃºn el turno
+	        // Cambiar el color del botón según el turno
 	        if (turno) {
 	            // Es el turno del jugador o NPC, cambiar el color a verde
 	            this.btnCambioX.setBackground(Color.GREEN);
