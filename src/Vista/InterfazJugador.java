@@ -39,6 +39,7 @@ public class InterfazJugador extends JFrame implements Observer {
     private ControlerJugador miControlador;
 //    private JButton botonPokemon; 
     private JButton btnCambioX;
+    private HashMap<Integer, String> pokedex;
 
    
     
