@@ -51,9 +51,9 @@ public class ListaJugadores {
 			String nombre="NPC"+" " +num;
 			NPC npc= new NPC(nombre);
 			this.lJugadores.add(npc);
-			System.out.println("Se ha añadido:"+" "+npc.getNombre());
+			System.out.println("Se ha aÃ±adido:"+" "+npc.getNombre());
 			//npc.setNombre(nombre);
-			npc.añadirPokemons(numPokemon);
+			npc.aÃ±adirPokemons(numPokemon);
 		}
 		for(int i=0;i<numPlayers;i++) {
 			int num=i+1;
@@ -64,8 +64,8 @@ public class ListaJugadores {
 				Boolean pTurno=true;
 				jugador.setTurno(pTurno);
 			}					
-			System.out.println("Se ha añadido:"+" "+jugador.getNombre());
-			jugador.añadirPokemons(numPokemon);
+			System.out.println("Se ha aÃ±adido:"+" "+jugador.getNombre());
+			jugador.aÃ±adirPokemons(numPokemon);
 		}
 		
 	}
@@ -107,6 +107,20 @@ public class ListaJugadores {
 			}
 		}
 		return aux.turno;
+		
+	}
+	public SuperJugador getJugadorTurno() {
+		Iterator<SuperJugador> itr=this.getIterador();
+		SuperJugador aux=null;
+		while(itr.hasNext()) {
+			SuperJugador act=itr.next();
+			if (act.turno){
+				
+				aux=act;
+				
+			}
+		}
+		return aux;
 		
 	}
 
