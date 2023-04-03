@@ -86,6 +86,7 @@ public class Tablero {
 			System.out.println("Ahora tiene de vida :"+jugador2.equipoPokemon.getPokemon(i).getVida());
 //			this.cambiarTurno(jugador1);
 			GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().cambiarTurno(jugador1);
+			GestorJuegoPokemon.getMiGestorJuegoPokemon().comprobarVictoria(jugador2);
 		}
 		
 	}

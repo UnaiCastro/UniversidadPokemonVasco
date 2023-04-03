@@ -70,5 +70,9 @@ public class GestorJuegoPokemon extends Observable{
 	public ListaJugadores getLista() {
 		return this.jugadores;
 	}
+
+	public void comprobarVictoria(SuperJugador jugador2) {
+		this.jugadores.comprobarVictoria(jugador2);
+	}
 	
 }

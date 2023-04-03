@@ -63,4 +63,20 @@ public class Equipo {
 		}
 		return indF;
 	}
+	
+	public void comprobarVictoria() {
+		boolean vic=true;
+		Iterator<Pokemon> itr=this.getIterador();
+		while(itr.hasNext()) {
+			Pokemon act= itr.next();
+			if (act.getVida()!=0) {
+				vic=false;
+			}
+		}
+		if(vic==false) {
+			System.out.println("No ha ganado nadie, seguir!!");
+		}else {
+			System.out.println("Se acabo la partida, Enhorabuena");
+		}
+	}
 }

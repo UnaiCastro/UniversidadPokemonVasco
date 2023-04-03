@@ -144,5 +144,15 @@ public class ListaJugadores {
 			this.lJugadores.get(ind).setTurno(true);
 		}
 	}
+
+	public void comprobarVictoria(SuperJugador jugador2) {
+		Iterator<SuperJugador> itr=this.getIterador();
+		while(itr.hasNext()) {
+			SuperJugador act=itr.next();
+			if (act.getNombre().equals(jugador2.getNombre())) {
+				act.equipoPokemon.comprobarVictoria();
+			}
+		}
+	}
 	
 }
