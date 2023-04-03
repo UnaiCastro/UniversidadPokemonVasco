@@ -65,7 +65,6 @@ public class ListaJugadores {
 				jugador.setTurno(pTurno);
 			}					
 			System.out.println("Se ha añadido:"+" "+jugador.getNombre());
-			//jugador.setNombre(nombre);
 			jugador.añadirPokemons(numPokemon);
 		}
 		
@@ -145,10 +144,5 @@ public class ListaJugadores {
 			this.lJugadores.get(ind).setTurno(true);
 		}
 	}
-
-//	private boo0lean buscarJuagdor(String player) {
-//		return false;
-//	}
-	
 	
 }

@@ -24,12 +24,7 @@ public class GestorJuegoPokemon extends Observable{
 	
 
 	public void empieza(int numPlayers, int numNPCs, int numPokemon) {
-		//System.out.println("Ha llegado la llamada a GestorJuego");
 		this.jugadores.registrar(numPlayers, numNPCs,numPokemon);
-		//this.jugadores.decirNombres();
-		//this.jugadores.verPokemons();
-		//int tamaño=this.jugadores.getSize();
-		//System.out.println("Tmaño= "+tamaño);
 		ArrayList<Object> report = new ArrayList<Object>();
 		report.add(this.jugadores.getMisJugadores());
 		//report.add(false);
