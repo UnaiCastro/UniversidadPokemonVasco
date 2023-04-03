@@ -155,7 +155,6 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 				int numPlayers = getPlayers();
 				int numNPCs = getNPCs();
 				int numPokemon = getPokemon();
-				GestorJuegoPokemon.getMiGestorJuegoPokemon().empieza(numPlayers, numNPCs, numPokemon);
 				if(numPlayers > 0 && numNPCs > 0 && numPokemon > 0){
 					GestorJuegoPokemon.getMiGestorJuegoPokemon().empieza(numPlayers, numNPCs, numPokemon);
 					InterfazJuegoPokemon.this.frame.setVisible(false);
