@@ -77,7 +77,7 @@ public class Tablero {
 
 
 	public void atacar() {
-		if ((this.jugador1 != null) && (this.jugador2 != null) && (this.pokemon1 != null) && (this.pokemon2 != null)){
+		if ((this.jugador1 != null) && (this.jugador2 != null) && (this.pokemon1.vida != 0) && (this.pokemon2.vida!=0)){
 			int vida= pokemon2.getVida()+pokemon2.getDefensa()-pokemon1.getAtaque();
 //			System.out.println(" "+pokemon2.getVida()+" "+pokemon2.getDefensa()+" "+pokemon1.getAtaque()+" "+vida);
 			int i=jugador2.getPosPokemon(pokemon2);
@@ -85,10 +85,13 @@ public class Tablero {
 			jugador2.equipoPokemon.getPokemon(i).bajarVida(vida);
 			System.out.println("Ahora tiene de vida :"+jugador2.equipoPokemon.getPokemon(i).getVida());
 //			this.cambiarTurno(jugador1);
-			GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().cambiarTurno(jugador1);
+//			GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().cambiarTurno(jugador1);
 			GestorJuegoPokemon.getMiGestorJuegoPokemon().comprobarVictoria(jugador2);
 		}
-		
+		this.jugador1=null;
+		this.jugador2=null;
+		this.pokemon1=null;
+		this.pokemon2=null;
 	}//
 		
 }

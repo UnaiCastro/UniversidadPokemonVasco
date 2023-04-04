@@ -1,6 +1,9 @@
 package Modelo;
 
 import java.util.Iterator;
+
+import javax.swing.JOptionPane;
+
 import java.util.ArrayList;
 
 public class Equipo {
@@ -77,6 +80,17 @@ public class Equipo {
 			System.out.println("No ha ganado nadie, seguir!!");
 		}else {
 			System.out.println("Se acabo la partida, Enhorabuena");
+			JOptionPane.showMessageDialog(null, "¡Has ganado!");
+			System.exit(0);
 		}
 	}//
+
+	public void ponerPokeAtacados() {
+		Iterator<Pokemon> itr=this.getIterador();
+		while(itr.hasNext()) {
+			Pokemon act=itr.next();
+			act.setAtaca(false);
+		}
+		System.out.println("Tus Pokemons pueden atacar de nuevo");
+	}
 }

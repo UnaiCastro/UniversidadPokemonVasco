@@ -8,12 +8,14 @@ public abstract class Pokemon {
 	protected int defensa;
 	protected String tipo;
 	protected String nombre;
+	protected boolean muerto=false;
+	protected boolean haAtacado=false;
 	
 	public Pokemon() {
 //		this.nombre=pNombre;
 		this.ataque=11+this.randomNumero(1,7);
 		this.defensa=3+this.randomNumero(1,4);//random(1-4);
-		this.vida=1;//+this.randomNumero(1,20);//+random(1-20);
+		this.vida=15;//+this.randomNumero(1,20);//+random(1-20);
 	}
 	
 	public abstract String getTipo();
@@ -26,6 +28,14 @@ public abstract class Pokemon {
 	
 	public int getVida() {
 		return this.vida;
+	}
+	
+	public boolean getAtaca() {
+		return this.haAtacado;
+	}
+	
+	public void setAtaca(boolean pBool) {
+		this.haAtacado=pBool;
 	}
 	
 	public int randomNumero(int pInicial,int pFinal) {

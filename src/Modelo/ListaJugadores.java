@@ -2,6 +2,7 @@ package Modelo;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 public class ListaJugadores {
 	private ArrayList<SuperJugador> lJugadores;
@@ -133,16 +134,20 @@ public class ListaJugadores {
 			if (act.getNombre().equals(pJugador.getNombre())) {
 				ind=i;
 				this.lJugadores.get(i).setTurno(false);
+				Random rand = new Random();
+				int indice=rand.nextInt(this.getMisJugadores().size());
+				this.lJugadores.get(indice).setTurno(true);
+				System.out.println("Es el turno de "+this.lJugadores.get(indice).getNombre());
 				break;
 			}
 		}
-		ind=ind+1;
-		if (ind==this.lJugadores.size()) {
-			ind=0;
-			this.lJugadores.get(ind).setTurno(true);
-		}else {
-			this.lJugadores.get(ind).setTurno(true);
-		}
+//		ind=ind+1;
+//		if (ind==this.lJugadores.size()) {
+//			ind=0;
+//			this.lJugadores.get(ind).setTurno(true);
+//		}else {
+//			this.lJugadores.get(ind).setTurno(true);
+//		}
 	}
 
 	public void comprobarVictoria(SuperJugador jugador2) {
