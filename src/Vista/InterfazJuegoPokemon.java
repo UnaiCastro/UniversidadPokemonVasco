@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
+import java.awt.Font;
+import java.awt.Toolkit;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -34,6 +36,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 import Modelo.Equipo;
 import Modelo.GestorJuegoPokemon;
@@ -80,7 +84,7 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 	            e.printStackTrace();
 	        }
 
-	        // Panel de los campos y botón
+	        // Panel de los campos y botÃ³n
 	        JPanel fieldsPanel = new JPanel();
 	        fieldsPanel.setLayout(new BoxLayout(fieldsPanel, BoxLayout.Y_AXIS));
 
@@ -98,7 +102,7 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 	        npcsPanel.add(Box.createRigidArea(new Dimension(10, 0)));
 	        npcsPanel.add(npcsField);
 
-	        JLabel pokemonLabel = new JLabel("Pokémon:");
+	        JLabel pokemonLabel = new JLabel("PokÃ©mon:");
 	        pokemonField = new JTextField(10);
 	        JPanel pokemonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 	        pokemonPanel.add(pokemonLabel);
@@ -122,6 +126,10 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 
 	        mainPanel.add(imagePanel, BorderLayout.WEST);
 	        mainPanel.add(fieldsPanel, BorderLayout.EAST);
+		
+		Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+                frame.setSize(pantalla.width, pantalla.height);
+                frame.setLocation(0, 0);
 
 	        frame.add(mainPanel);
 	        frame.setVisible(true);
@@ -150,7 +158,20 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 				int numPlayers = getPlayers();
 				int numNPCs = getNPCs();
 				int numPokemon = getPokemon();
-				GestorJuegoPokemon.getMiGestorJuegoPokemon().empieza(numPlayers, numNPCs, numPokemon);
+				if(numPlayers > 0 && numNPCs > 0 && numPokemon > 0){
+                                GestorJuegoPokemon.getMiGestorJuegoPokemon().empieza(numPlayers, numNPCs, numPokemon);
+                                        GestorJuegoPokemon.getMiGestorJuegoPokemon().empieza(numPlayers, numNPCs, numPokemon);
+                                        InterfazJuegoPokemon.this.frame.setVisible(false);
+                                        
+                                
+                                }
+                                else{
+                                        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 35));
+                                            UIManager.put("OptionPane.minimumSize", new Dimension(200, 200));
+                                            UIManager.put("OptionPane.messageAlignment", SwingConstants.CENTER);
+                                        JOptionPane.showMessageDialog(startButton, "Los valores introducidos son incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+                                
+                                }
 				
 				
 			}
