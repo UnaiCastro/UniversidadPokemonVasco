@@ -71,7 +71,7 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 	        JPanel imagePanel = new JPanel();
 	        try {
 	            JLabel imageLabel = new JLabel();
-	            Image image = ImageIO.read(new File("C:/Users/kasme/OneDrive/Escritorio/Pokemon_Fotos/main.png"));
+	            Image image = ImageIO.read(new File("src/Sprites/main.png"));
 	            Image scaledImage = image.getScaledInstance(800, 400, Image.SCALE_SMOOTH);
 	            ImageIcon icon = new ImageIcon(scaledImage);
 	            imageLabel.setIcon(icon);
