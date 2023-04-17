@@ -166,13 +166,13 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 			int iJugador=1;
 			while(into.hasNext()) {
 				SuperJugador act=into.next();
-				System.out.println("Soy "+act.getNombre());
-				Equipo pEquipo=act.getMiEquipo();
+				//System.out.println("Soy "+act.getNombre());
+//				Equipo pEquipo=act.getMiEquipo();
 				if (act.getNombre().equals("Jugador"+" "+iJugador)){
-					new InterfazJugador(act.getNombre(),act.getMiEquipo().getTamanoEquipo(),pEquipo);
+					new InterfazJugador(act.getNombre(),act.getMiEquipo().getTamanoEquipo(),act.getMiEquipo());
 					iJugador++;
 				}else {
-					new InterfazJugador(act.getNombre() ,act.getMiEquipo().getTamanoEquipo(), pEquipo);
+					new InterfazJugador(act.getNombre() ,act.getMiEquipo().getTamanoEquipo(), act.getMiEquipo());
 				}
 			}
 		}
