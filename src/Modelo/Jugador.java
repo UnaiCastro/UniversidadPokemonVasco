@@ -15,4 +15,16 @@ public class Jugador extends SuperJugador{
 		this.turno=pTurno;
 	}
 
+	@Override
+	public void atacarN(String pNombre) {
+//		System.out.println("Has llegado a jugador el metodo atacarN");
+		
+	}
+
+//	@Override
+//	public void atacarN2Version(String pNombre) {
+		// TODO Auto-generated method stub
+		
 }
+
+

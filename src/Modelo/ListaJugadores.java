@@ -71,29 +71,24 @@ public class ListaJugadores {
 		
 	}//
 
-	public void decirNombres() {
-		Iterator<SuperJugador> itr = this.getIterador();
-		while (itr.hasNext()) {
-			SuperJugador act = itr.next();
-			//System.out.println("Hola soy : "+act.getNombre());
-		}
-	}
+//	public void decirNombres() {
+//		Iterator<SuperJugador> itr = this.getIterador();
+//		while (itr.hasNext()) {
+//			SuperJugador act = itr.next();
+//			//System.out.println("Hola soy : "+act.getNombre());
+//		}
+//	}
 
-	public void verPokemons() {
-		Iterator<SuperJugador> itr = this.getIterador();
-		while (itr.hasNext()) {
-			SuperJugador act = itr.next();
-			//System.out.println("Hola soy : "+act.getNombre()+" y tengo "+act.equipoPokemon.getTamanoEquipo());
-		}
-	}
+//	public void verPokemons() {
+//		Iterator<SuperJugador> itr = this.getIterador();
+//		while (itr.hasNext()) {
+//			SuperJugador act = itr.next();
+//			//System.out.println("Hola soy : "+act.getNombre()+" y tengo "+act.equipoPokemon.getTamanoEquipo());
+//		}
+//	}
 	
 	public SuperJugador getSuperJugadorPosicion(int i) {
 		return this.lJugadores.get(i);
-	}
-
-	public void buscarYAtacar(String jugador2, int pokemon2, String jugador1, int pokemon1) {
-		//HACER
-		
 	}
 
 	public boolean mirarTurno(String player) {
@@ -128,11 +123,9 @@ public class ListaJugadores {
 
 	public void cambiarTurno(SuperJugador pJugador) {
 		Iterator<SuperJugador> itr=this.getIterador();
-		int ind=0;
 		for (int i=0;i<this.lJugadores.size();i++){
 			SuperJugador act=itr.next();
 			if (act.getNombre().equals(pJugador.getNombre())) {
-				ind=i;
 				this.lJugadores.get(i).setTurno(false);
 				Random rand = new Random();
 				int indice=rand.nextInt(this.getMisJugadores().size());
@@ -141,23 +134,23 @@ public class ListaJugadores {
 				break;
 			}
 		}
-//		ind=ind+1;
-//		if (ind==this.lJugadores.size()) {
-//			ind=0;
-//			this.lJugadores.get(ind).setTurno(true);
-//		}else {
-//			this.lJugadores.get(ind).setTurno(true);
-//		}
 	}
-
-	public void comprobarVictoria(SuperJugador jugador2) {
+	
+	public SuperJugador getJugadorTurno() {
 		Iterator<SuperJugador> itr=this.getIterador();
-		while(itr.hasNext()) {
+		SuperJugador aux=null;
+		for (int i=0;i<this.lJugadores.size();i++){
 			SuperJugador act=itr.next();
-			if (act.getNombre().equals(jugador2.getNombre())) {
-				act.equipoPokemon.comprobarVictoria();
+			if (act.turno) {
+				aux=act;
+				
 			}
 		}
+		return aux;
+	}
+
+	public boolean hayWinner() {
+		return ((int)this.lJugadores.stream().filter(p -> p.getDerrotado()).count() == this.lJugadores.size() - 1);		
 	}
 	
 }

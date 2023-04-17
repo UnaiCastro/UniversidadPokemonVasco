@@ -16,22 +16,20 @@ public class PokemonFactory {
 		return mArmaFactory;
 	}
 	
-	public Pokemon createPokemon(String pTipo, String pNombre) {
-		if(pTipo=="Agua") {
-			return new Agua(pNombre);
-		}
-		else if(pTipo=="Planta") {
+	public Pokemon createPokemon(int i, String pNombre) {
+		if(i==1) {
 			return new Planta(pNombre);
 		}
-		else if(pTipo=="Fuego") {
-			return new Fuego(pNombre);
+		else if(i==2) {
+			return new Agua(pNombre);
 		}
-		else if (pTipo=="Normal") {
-			return new Normal(pNombre);
-		}
-		else {
+		else if(i==3) {
 			return new Electrico(pNombre);
 		}
+		else {
+			return new Fuego(pNombre);
+		}
+		
 	}//
 
 }

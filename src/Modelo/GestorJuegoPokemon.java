@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import Vista.InterfazJuegoPokemon;
-import Vista.InterfazJugador;
+//import Vista.InterfazJugador;
 
 public class GestorJuegoPokemon extends Observable{
 	private static GestorJuegoPokemon miGestorJuego;
@@ -54,8 +54,8 @@ public class GestorJuegoPokemon extends Observable{
 		return this.jugadores;
 	}//
 
-	public void comprobarVictoria(SuperJugador jugador2) {
-		this.jugadores.comprobarVictoria(jugador2);
-	}//
+	public boolean hayWinner() {
+		return this.jugadores.hayWinner();
+	}
 	
 }

@@ -1,5 +1,7 @@
 package Modelo;
 
+import javax.swing.JOptionPane;
+
 public class Tablero {
 	private Pokemon pokemon1;
 	private Pokemon pokemon2;
@@ -18,24 +20,6 @@ public class Tablero {
 		}
 		return Tablero.mTablero;
 	}
-//	public void añadirPokemon(int i,String pPlayer) {
-//		if (this.jugador1!=null) {
-//			System.out.println("Vamos a atacar");
-//			this.jugador2=pPlayer;
-//			this.pokemon2=i;
-//			System.out.println("Vamos a Gestor");
-//			GestorJuegoPokemon.getMiGestorJuegoPokemon().accionarAtaque(jugador2, pokemon2, jugador1, pokemon1);
-//		} else {
-//			System.out.println("Esperamos tu eleccion");
-//			this.jugador1=pPlayer;
-//			this.pokemon1=i;
-//		}
-//	}
-
-//	public boolean mirarTurno(String player) {
-//		return GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarTurno(player);
-//		
-//	}
 
 	public void setJugadorAtacante(SuperJugador nombrePlayer) {
 		this.jugador1=nombrePlayer;
@@ -77,21 +61,27 @@ public class Tablero {
 
 
 	public void atacar() {
-		if ((this.jugador1 != null) && (this.jugador2 != null) && (this.pokemon1.vida != 0) && (this.pokemon2.vida!=0)){
-			int vida= pokemon2.getVida()+pokemon2.getDefensa()-pokemon1.getAtaque();
-//			System.out.println(" "+pokemon2.getVida()+" "+pokemon2.getDefensa()+" "+pokemon1.getAtaque()+" "+vida);
+		if ((this.jugador1 != null) && (this.jugador2 != null) && (this.pokemon1.getVida()!= 0) && (this.pokemon2.getVida()!=0)){
+			int vida= pokemon2.getVida()+ pokemon2.getDefensa()- pokemon1.getAtaque();
 			int i=jugador2.getPosPokemon(pokemon2);
 			System.out.println("Antes de atacar tiene de vida :"+jugador2.equipoPokemon.getPokemon(i).getVida());
-			jugador2.equipoPokemon.getPokemon(i).bajarVida(vida);
+			jugador2.bajarVidaPokemon(i,vida);
 			System.out.println("Ahora tiene de vida :"+jugador2.equipoPokemon.getPokemon(i).getVida());
-//			this.cambiarTurno(jugador1);
-//			GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().cambiarTurno(jugador1);
-			GestorJuegoPokemon.getMiGestorJuegoPokemon().comprobarVictoria(jugador2);
+			if (GestorJuegoPokemon.getMiGestorJuegoPokemon().hayWinner()) {
+				this.jugador1.setderrotado(false);
+				JOptionPane.showMessageDialog(null, "¡Se ha acabado, ganaste!");
+				System.exit(0);
+			}
+
 		}
+		this.limpiar();
+	}//
+	
+	public void limpiar() {
 		this.jugador1=null;
 		this.jugador2=null;
 		this.pokemon1=null;
 		this.pokemon2=null;
-	}//
-		
+	}
+	
 }
