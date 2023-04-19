@@ -54,8 +54,34 @@ public class GestorJuegoPokemon extends Observable{
 		return this.jugadores;
 	}//
 
-	public boolean hayWinner() {
-		return this.jugadores.hayWinner();
+	public boolean hayGanador() {
+		return this.jugadores.hayGanador();
+	}
+
+	public void administraAtaque(int ind, SuperJugador pJugador) {
+		if (!pJugador.getDerrotado()) {
+			if (this.mirarTurno(pJugador.getNombre())) {
+				if (!pJugador.equipoPokemon.getPokemon(ind).estaMuerto()) {
+					Tablero.getMiTablero().setAtacantePokemon(pJugador.equipoPokemon.getPokemon(ind));
+					Tablero.getMiTablero().setJugadorAtacante(pJugador);
+					System.out.println("El jugador atacante es "+Tablero.getMiTablero().getJugador1()+" y el pokemon es el "+Tablero.getMiTablero().getPokemon1());
+				}else {
+					System.out.println("Este pokemon esta muerto");
+				}
+			} else {
+				if (!pJugador.equipoPokemon.getPokemon(ind).estaMuerto()) {
+					Tablero.getMiTablero().setDefensaPokemon(pJugador.equipoPokemon.getPokemon(ind));
+					Tablero.getMiTablero().setDefendsPlayer(pJugador);
+					System.out.println("El jugador defensor es "+Tablero.getMiTablero().getJugador2()+" y el pokemon es el "+Tablero.getMiTablero().getPokemon2());
+					Tablero.getMiTablero().atacar();
+				}else {
+					System.out.println("Este pokemon esta muerto");
+				}
+			}
+		}else {
+			System.out.println("Este Jugador esta muerto, selecciona otro");
+		}
+		
 	}
 	
 }

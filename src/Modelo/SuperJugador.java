@@ -34,6 +34,11 @@ public abstract class SuperJugador extends Observable{
 		this.turno=pBoolean;
 		this.setChanged();
 		this.notifyObservers();
+//		try {
+//	        Thread.sleep(1000); // detener la ejecución del método durante 1 segundo
+//	    } catch (InterruptedException e) {
+//	        e.printStackTrace();
+//	    }
 	}//
 
 	public Pokemon getPokemon(int ind) {
@@ -56,16 +61,22 @@ public abstract class SuperJugador extends Observable{
 			this.setderrotado(true);
 			System.out.println("Has muerto "+this.derrotado+" "+this.nombre);
 		}
-		setChanged();
-		this.notifyObservers();
+		
 	}
 	
-	public abstract void atacarN(String pNombre);
+	public abstract void atacarN();
 	
 	
 	
 	public void setderrotado(Boolean pDerrotado) {
 		this.derrotado=pDerrotado;
+	}
+
+	public void actuEuforia(int i) {
+		this.equipoPokemon.actuEuforia(i);
+		setChanged();
+		this.notifyObservers();
+		
 	}
 	
 }

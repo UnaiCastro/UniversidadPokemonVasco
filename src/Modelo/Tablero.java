@@ -61,13 +61,19 @@ public class Tablero {
 
 
 	public void atacar() {
-		if ((this.jugador1 != null) && (this.jugador2 != null) && (this.pokemon1.getVida()!= 0) && (this.pokemon2.getVida()!=0)){
+		if ((this.jugador1 != null) && (this.jugador2 != null)){
 			int vida= pokemon2.getVida()+ pokemon2.getDefensa()- pokemon1.getAtaque();
 			int i=jugador2.getPosPokemon(pokemon2);
 			System.out.println("Antes de atacar tiene de vida :"+jugador2.equipoPokemon.getPokemon(i).getVida());
 			jugador2.bajarVidaPokemon(i,vida);
 			System.out.println("Ahora tiene de vida :"+jugador2.equipoPokemon.getPokemon(i).getVida());
-			if (GestorJuegoPokemon.getMiGestorJuegoPokemon().hayWinner()) {
+//			jugador2.actuEuforia(i);
+			pokemon2.actuEuforia();
+			if(pokemon1.getEuforia()==pokemon1.getEuforiaMax()) {
+				pokemon1.bajarEuforia();
+			}
+//			jugador2.verEuforia(i);
+			if (GestorJuegoPokemon.getMiGestorJuegoPokemon().hayGanador()) {
 				this.jugador1.setderrotado(false);
 				JOptionPane.showMessageDialog(null, "¡Se ha acabado, ganaste!");
 				System.exit(0);

@@ -38,7 +38,7 @@ public class Equipo {
 		Iterator<Pokemon> itr=this.getIterador();
 		while (itr.hasNext()) {
 			Pokemon act =itr.next();
-			System.out.println("Hola soy :"+act.getNombre()+" y soy de tipo "+act.tipo+" y tengo estas caracteristicas: Ataque "+act.getAtaque()+" Defensa: "+act.getDefensa()+" y Vida: "+act.vida);
+			System.out.println("Hola soy :"+act.getNombre()+" y soy de tipo "+act.tipo+" y tengo estas caracteristicas: Ataque "+act.getAtaque()+" Defensa: "+act.getDefensa()+" y Vida: "+act.getVida());
 		}
 	}//
 
@@ -46,16 +46,7 @@ public class Equipo {
 		return this.lPokemon.get(lugarPokemon);
 	}
 
-	public void bajarVida(int vida, Pokemon pokemon2) {
-		Iterator<Pokemon> itr=this.getIterador();
-		while (itr.hasNext()) {
-			Pokemon act=itr.next();
-			if (act.equals(pokemon2)) {
-				act.vida=act.vida-vida;
-			}
-		}
-		
-	}
+
 
 	public int getPosPoke(Pokemon pokemon2) {
 		int ind=0;
@@ -69,23 +60,7 @@ public class Equipo {
 		return indF;
 	}
 	
-	public void comprobarVictoria() {
-		boolean vic=true;
-		Iterator<Pokemon> itr=this.getIterador();
-		while(itr.hasNext()) {
-			Pokemon act= itr.next();
-			if (act.getVida()!=0) {
-				vic=false;
-			}
-		}
-		if(vic==false) {
-			System.out.println("No ha ganado nadie, seguir!!");
-		}else {
-			System.out.println("Se acabo la partida, Enhorabuena");
-			JOptionPane.showMessageDialog(null, "¡Has ganado!");
-			System.exit(0);
-		}
-	}//
+
 
 	public void ponerPokeAtacados() {
 		Iterator<Pokemon> itr=this.getIterador();
@@ -104,5 +79,11 @@ public class Equipo {
 	
 	public boolean todosMueertos() {
 		return this.lPokemon.stream().allMatch(p -> p.estaMuerto());
-	}	
+	}
+
+	public void actuEuforia(int i) {
+		this.getPokemon(i).actuEuforia();
+		
+	}
+	
 }

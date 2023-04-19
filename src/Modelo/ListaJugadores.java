@@ -149,7 +149,7 @@ public class ListaJugadores {
 		return aux;
 	}
 
-	public boolean hayWinner() {
+	public boolean hayGanador() {
 		return ((int)this.lJugadores.stream().filter(p -> p.getDerrotado()).count() == this.lJugadores.size() - 1);		
 	}
 	
