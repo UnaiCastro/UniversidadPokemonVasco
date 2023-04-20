@@ -15,4 +15,13 @@ public class Fuego extends Pokemon{
 	public String getTipo() {
 		return this.tipo;
 	}
+
+	@Override
+	protected int mejoraAtaque(String pTipoPoke) {
+		int multi=1;
+		if (pTipoPoke.equals("Agua")) {
+			multi=2;
+		}
+		return multi;
+	}
 }

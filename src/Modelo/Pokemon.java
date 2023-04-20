@@ -5,6 +5,9 @@ import java.util.Random;
 
 import Modelo.StateEvolucion.StateEvolu;
 import Modelo.StateEvolucion.Base;
+import Modelo.StateEvolucion.Euforia;
+import Modelo.StateEvolucion.PrimerEvo;
+import Modelo.StateEvolucion.SegunEvo;
 
 public abstract class Pokemon extends Observable{
 	private int ataque;
@@ -23,19 +26,21 @@ public abstract class Pokemon extends Observable{
 	public Pokemon() {
 		this.ataque=11+this.randomNumero(1,7);
 		this.defensa=3+this.randomNumero(1,4);//random(1-4);
-		this.vida=15;//+this.randomNumero(1,20);//+random(1-20);
+		this.vida=200;//+this.randomNumero(1,20);//+random(1-20);
 		this.maxHp=this.vida;
 		this.euforiaMaxima = this.rand.nextInt(3) + 4;
 		this.euforiaActual = 0;
 
 	}
 	
-	public abstract String getTipo();
+	public String getTipo() {
+		return this.tipo;
+	}
 	public int getAtaque() {
-		return this.ataque;
+		return this.ataque+ this.evoState.boostAtaque();
 	}
 	public int getDefensa() {
-		return this.defensa;
+		return this.defensa+this.evoState.boostDefensa();
 	}
 	
 	public int getVida() {
@@ -44,6 +49,10 @@ public abstract class Pokemon extends Observable{
 	
 	public boolean getAtaca() {
 		return this.haAtacado;
+	}
+	
+	public StateEvolu getState() {
+		return this.evoState;
 	}
 	
 	public void setAtaca(boolean pBool) {
@@ -94,11 +103,17 @@ public abstract class Pokemon extends Observable{
 	}
 	
 	public void bajarEuforia() {
-		this.ataque=this.ataque-100;			
-		this.defensa=this.defensa-100;
-		this.euforiaActual=0;
-		setChanged();
-		this.notifyObservers();
+//		this.ataque=this.ataque-100;			
+//		this.defensa=this.defensa-100;
+//		this.euforiaActual=0;
+//		setChanged();
+//		this.notifyObservers();
+		if (this.evoState instanceof Euforia) {
+			this.euforiaActual = 0;
+			revisionEuforiaEvolu();
+			setChanged();
+			notifyObservers();
+		}
 	}
 	
 	public int getEuforia() {
@@ -108,5 +123,53 @@ public abstract class Pokemon extends Observable{
 	public int getEuforiaMax() {
 		return this.euforiaMaxima;
 	}
+
+	public int gestionAtaque(int valorAtaque, String pTipoPoke) {
+		System.out.println(+this.evoState.boostAtaque()+" "+this.evoState.boostDefensa()+" "+this.evoState.evolucion());
+		int multiplicador = mejoraAtaque(pTipoPoke);
+		System.out.println(+multiplicador);
+		int daño = multiplicador * valorAtaque - this.getDefensa();
+		System.out.println(+daño);
+		if (daño < 0) {
+			daño = 0;
+		}
+		this.vida -= daño;
+		System.out.println(+this.vida);
+		if (this.vida <= 0) {
+			this.setMuerto(true);
+		}
+		if (this.euforiaActual < this.euforiaMaxima) {
+			this.euforiaActual++;
+			System.out.println("Este Pokemon ha subido uno de euforia, tiene "+this.euforiaActual);
+		} else {
+			      
+			this.euforiaActual = this.euforiaMaxima;
+		} 
+		revisionEuforiaEvolu();
+		setChanged();
+		notifyObservers();
+		return this.vida;
+	}
+	
+	private void revisionEuforiaEvolu() {
+		if (this.vida > this.maxHp / 2) {
+			cambioState((StateEvolu)new Base());
+		}
+		if (this.vida <= this.maxHp / 2) {
+			cambioState((StateEvolu)new PrimerEvo());
+		}
+		if (this.vida <= this.maxHp / 4) {
+			cambioState((StateEvolu)new SegunEvo());
+		}
+		if (this.euforiaActual == this.euforiaMaxima) {
+			cambioState((StateEvolu)new Euforia());
+		}
+	}
+	
+	private void cambioState(StateEvolu pState) {
+		this.evoState = pState;
+	}
+
+	protected abstract int mejoraAtaque(String pTipoPoke);
 	
 }

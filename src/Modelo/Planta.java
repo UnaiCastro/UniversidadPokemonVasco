@@ -15,4 +15,13 @@ public class Planta extends Pokemon {
 	public String getTipo() {
 		return this.tipo;
 	}
+
+	@Override
+	protected int mejoraAtaque(String pTipoPoke) {
+		int multi=1;
+		if (pTipoPoke.equals("Fuego")) {
+			multi=2;
+		}
+		return multi;
+	}
 }

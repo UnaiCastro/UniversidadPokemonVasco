@@ -90,7 +90,8 @@ public class InterfazJugador extends JFrame implements Observer {
         
         this.lBotonPokemon= new ArrayList<JButton>();
         for (int i = 0; i < numPokemon; i++) {  
-        	String[] infoPokemon = {"Ataque: "+equipoJugador.getPokemon(i).getAtaque()," Defensa: "+equipoJugador.getPokemon(i).getDefensa(), " Vida: "+equipoJugador.getPokemon(i).getVida(), " Tipo: "+equipoJugador.getPokemon(i).getTipo()};
+//        	String[] infoPokemon = {"Ataque: "+equipoJugador.getPokemon(i).getAtaque()+equipoJugador.getPokemon(i).getState().boostAtaque()+"\n"+" Defensa: "+equipoJugador.getPokemon(i).getDefensa()+equipoJugador.getPokemon(i).getState().boostDefensa()+"\n"+ " Vida: "+equipoJugador.getPokemon(i).getVida()+"\n"+ " Tipo: "+equipoJugador.getPokemon(i).getTipo()};
+        	String[] infoPokemon = {"Ataque: "+equipoJugador.getPokemon(i).getAtaque()+"\n"+" Defensa: "+equipoJugador.getPokemon(i).getDefensa()+"\n"+ " Vida: "+equipoJugador.getPokemon(i).getVida()+"\n"+ " Tipo: "+equipoJugador.getPokemon(i).getTipo()};
             ImageIcon imagenPokemon = new ImageIcon("src/sprites/" + (rand1.nextInt(11)+1) + ".png");
             JLabel labelImagenPokemon = new JLabel(imagenPokemon);
             labelImagenPokemon.setBounds(posicionPokemonX, posicionPokemonY, 250, 350);
@@ -255,18 +256,13 @@ public class InterfazJugador extends JFrame implements Observer {
 	            this.btnCambioX.setText("Espera");
 	        }
 	        
-//	        for (int i = 0; i < numPokemon; i++) {  
-//	        	String infoPokemon = ("Ataque: "+equipoJugador.getPokemon(i).getAtaque()+"\n"+" Defensa: "+equipoJugador.getPokemon(i).getDefensa() +"\n"+" Vida: "+equipoJugador.getPokemon(i).getVida()+ "\n" +" Tipo: "+equipoJugador.getPokemon(i).getTipo());
-//	            
-//	        	
-//	                this.listaInfor.get(i).setText(infoPokemon);	                
-//	            
-//	        }
+
 	    }
 		if (o instanceof Pokemon) {
 			for (int i = 0; i < numPokemon; i++) {  
-	        	String infoPokemon = ("Ataque: "+equipoJugador.getPokemon(i).getAtaque()+"\n"+" Defensa: "+equipoJugador.getPokemon(i).getDefensa() +"\n"+" Vida: "+equipoJugador.getPokemon(i).getVida()+ "\n" +" Tipo: "+equipoJugador.getPokemon(i).getTipo());
-	            
+//	        	String infoPokemon = ("Ataque: "+equipoJugador.getPokemon(i).getAtaque()+equipoJugador.getPokemon(i).getState().boostAtaque()+"\n" +"Defensa: "+equipoJugador.getPokemon(i).getDefensa()+equipoJugador.getPokemon(i).getState().boostDefensa() +"\n"+" Vida: "+equipoJugador.getPokemon(i).getVida()+ "\n" +" Tipo: "+equipoJugador.getPokemon(i).getTipo());
+	        	String infoPokemon = ("Ataque: "+equipoJugador.getPokemon(i).getAtaque()+"\n" +"Defensa: "+equipoJugador.getPokemon(i).getDefensa()+"\n"+" Vida: "+equipoJugador.getPokemon(i).getVida()+ "\n" +" Tipo: "+equipoJugador.getPokemon(i).getTipo());
+
 	        	
 	                this.listaInfor.get(i).setText(infoPokemon);	                
 	            

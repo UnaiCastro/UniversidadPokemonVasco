@@ -14,4 +14,10 @@ public class Normal extends Pokemon {
 	public String getTipo() {
 		return this.tipo;
 	}
+
+	@Override
+	protected int mejoraAtaque(String pTipoPoke) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

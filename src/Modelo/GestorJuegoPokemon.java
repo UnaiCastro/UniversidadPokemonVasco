@@ -64,7 +64,7 @@ public class GestorJuegoPokemon extends Observable{
 				if (!pJugador.equipoPokemon.getPokemon(ind).estaMuerto()) {
 					Tablero.getMiTablero().setAtacantePokemon(pJugador.equipoPokemon.getPokemon(ind));
 					Tablero.getMiTablero().setJugadorAtacante(pJugador);
-					System.out.println("El jugador atacante es "+Tablero.getMiTablero().getJugador1()+" y el pokemon es el "+Tablero.getMiTablero().getPokemon1());
+					System.out.println("El jugador atacante es "+Tablero.getMiTablero().getJugador1().getNombre()+" y el pokemon es el "+Tablero.getMiTablero().getPokemon1().getNombre());
 				}else {
 					System.out.println("Este pokemon esta muerto");
 				}
@@ -72,7 +72,7 @@ public class GestorJuegoPokemon extends Observable{
 				if (!pJugador.equipoPokemon.getPokemon(ind).estaMuerto()) {
 					Tablero.getMiTablero().setDefensaPokemon(pJugador.equipoPokemon.getPokemon(ind));
 					Tablero.getMiTablero().setDefendsPlayer(pJugador);
-					System.out.println("El jugador defensor es "+Tablero.getMiTablero().getJugador2()+" y el pokemon es el "+Tablero.getMiTablero().getPokemon2());
+					System.out.println("El jugador defensor es "+Tablero.getMiTablero().getJugador2().getNombre()+" y el pokemon es el "+Tablero.getMiTablero().getPokemon2().getNombre());
 					Tablero.getMiTablero().atacar();
 				}else {
 					System.out.println("Este pokemon esta muerto");

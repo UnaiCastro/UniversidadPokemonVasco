@@ -34,11 +34,6 @@ public abstract class SuperJugador extends Observable{
 		this.turno=pBoolean;
 		this.setChanged();
 		this.notifyObservers();
-//		try {
-//	        Thread.sleep(1000); // detener la ejecución del método durante 1 segundo
-//	    } catch (InterruptedException e) {
-//	        e.printStackTrace();
-//	    }
 	}//
 
 	public Pokemon getPokemon(int ind) {

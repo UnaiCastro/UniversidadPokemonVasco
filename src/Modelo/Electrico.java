@@ -3,9 +3,6 @@ package Modelo;
 public class Electrico extends Pokemon {
 	
 	public Electrico(String pNombre) {
-//		this.ataque=11+this.randomNumero(1,7);
-//		this.defensa=3+this.randomNumero(1,4);//random(1-4);
-//		this.vida=200+this.randomNumero(1,20);//+random(1-20);
 		this.tipo="Electrico";
 		this.nombre=pNombre;
 
@@ -14,5 +11,14 @@ public class Electrico extends Pokemon {
 	@Override
 	public String getTipo() {
 		return this.tipo;
+	}
+
+	@Override
+	protected int mejoraAtaque(String pTipoPoke) {
+		int multi=1;
+		if (pTipoPoke.equals("Planta")) {
+			multi=2;
+		}
+		return multi;
 	}
 }
