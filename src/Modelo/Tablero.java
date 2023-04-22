@@ -83,6 +83,7 @@ public class Tablero {
 //				pokemon1.bajarEuforia();
 //			}
 //			jugador2.verEuforia(i);
+			this.pokemon1.setAtaca(true);
 			if (GestorJuegoPokemon.getMiGestorJuegoPokemon().hayGanador()) {
 				this.jugador1.setderrotado(false);
 				JOptionPane.showMessageDialog(null, "¡Se ha acabado, ganaste!");

@@ -62,9 +62,13 @@ public class GestorJuegoPokemon extends Observable{
 		if (!pJugador.getDerrotado()) {
 			if (this.mirarTurno(pJugador.getNombre())) {
 				if (!pJugador.equipoPokemon.getPokemon(ind).estaMuerto()) {
-					Tablero.getMiTablero().setAtacantePokemon(pJugador.equipoPokemon.getPokemon(ind));
-					Tablero.getMiTablero().setJugadorAtacante(pJugador);
-					System.out.println("El jugador atacante es "+Tablero.getMiTablero().getJugador1().getNombre()+" y el pokemon es el "+Tablero.getMiTablero().getPokemon1().getNombre());
+					if (!pJugador.equipoPokemon.getPokemon(ind).getAtaca()) {
+						Tablero.getMiTablero().setAtacantePokemon(pJugador.equipoPokemon.getPokemon(ind));
+						Tablero.getMiTablero().setJugadorAtacante(pJugador);
+						System.out.println("El jugador atacante es "+Tablero.getMiTablero().getJugador1().getNombre()+" y el pokemon es el "+Tablero.getMiTablero().getPokemon1().getNombre());
+					}else {
+						System.out.println("Este Pokemon ya ha atacado");
+					}
 				}else {
 					System.out.println("Este pokemon esta muerto");
 				}
