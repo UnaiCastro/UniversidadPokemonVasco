@@ -2,11 +2,13 @@ package Vista;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -28,9 +30,11 @@ import Modelo.NPC;
 import Modelo.Pokemon;
 import Modelo.SuperJugador;
 import Modelo.Tablero;
+//import Vista.PanelPokemon;
 
 
 public class InterfazJugador extends JFrame implements Observer {
+	private JFrame frame;
 	private ArrayList<JButton> lBotonPokemon=null;
 	private String playerName;
 	private Equipo equipoJugador;
@@ -38,16 +42,18 @@ public class InterfazJugador extends JFrame implements Observer {
     private JPanel mainPanel= new JPanel();
     private JLabel playerImageLabel=new JLabel();
     private ArrayList<JLabel> pokemonImageLabels=new ArrayList<JLabel>();
-    private JPanel panelPokemon;
+//    private JPanel panelPokemon;
     private ArrayList<JTextArea> listaInfor=new ArrayList<JTextArea>();
     private ArrayList<JProgressBar> lEuforiaBoton=null;
     private ControlerJugador miControlador; 
     private JButton btnCambioX;
     private ArrayList<JProgressBar> listaPanelEuforia;
+    private ArrayList<JProgressBar> listaVidaBar=new ArrayList<>();;
     Random rand1 = new Random();
     private ArrayList<JLabel> lPokemonPanel=new ArrayList<JLabel>();
     private JPanel panelIzquierdo;
     private ArrayList<PanelPokemon> panelesPokemon = new ArrayList<PanelPokemon>();
+    private JPanel cardsPanel;
 
    
     
@@ -61,68 +67,22 @@ public class InterfazJugador extends JFrame implements Observer {
 			GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(playerName).getMiEquipo().getPokemon(i).addObserver(this);
 		}
 	}
-//    private void inicializar(String playerName, int numPokemon, Equipo pEquipo) {
-//    	this.numPokemon=numPokemon;
-//    	this.playerName=playerName;
-//    	this.equipoJugador=pEquipo;
-//    	setTitle(playerName);
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setResizable(false);
-//        
-//        
-//        this.mainPanel.setLayout(null);
-//        getContentPane().add(this.mainPanel);
-//        this.mainPanel.setSize(1080,1080);
-//     // Agregar imagen en la parte superior izquierda
-//        ImageIcon imagen = new ImageIcon("src/sprites/trainer"+(rand1.nextInt(6))+".png");
-//        playerImageLabel.setIcon(imagen);
-//        this.playerImageLabel.setBounds(10, 50, 300, 350);
-//        this.mainPanel.add(playerImageLabel, BorderLayout.CENTER);
-//
-//        //Agregar Boton Izquierda Arriba
-//        this.btnCambioX= new JButton();
-////        btnCambioX.setBounds(10, 10, 100, 30);
-//        this.btnCambioX.setSize(90,35);
-//        boolean k=GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarTurno(playerName);
-//        if (k) {
-//        	btnCambioX.setBackground(Color.GREEN);
-//        	btnCambioX.setText("Tu Turno");
-//          } else {
-//        	  btnCambioX.setBackground(Color.YELLOW);
-//        	  btnCambioX.setText("Espera");
-//          }
-//        this.mainPanel.add(btnCambioX, BorderLayout.NORTH);
-//        btnCambioX.addMouseListener(getMiControlador());
-//        
-//        
-//        //Agregar Pantalla Pokemon
-//     // Agregar pantallas de pokémon
-//        for (int i = 0; i < numPokemon; i++) {
-//            PanelPokemon panelPokemon = new PanelPokemon(playerName,i);
-//            add(panelPokemon, BorderLayout.CENTER);
-//
-//            
-//            panelesPokemon.add(panelPokemon);
-//        }
-//        setSize(320 + numPokemon * 250, 540);
-//        setLocationRelativeTo(null);
-//        setVisible(true);
-//    
-//    
-//    
-//    
-//    }
+
+    
     
     private void inicializar(String playerName, int numPokemon, Equipo pEquipo) {
     	this.numPokemon=numPokemon;
     	this.playerName=playerName;
     	this.equipoJugador=pEquipo;
+    	this.frame=new JFrame(playerName);
     	setTitle(playerName);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setResizable(true);
+        
 
-        // Creamos el panel principal
+         //Creamos el panel principal
         this.mainPanel.setLayout(null);
+        this.mainPanel.setBackground(Color.WHITE);
         getContentPane().add(this.mainPanel);
 
         // Creamos el botón en la esquina superior izquierda
@@ -142,46 +102,91 @@ public class InterfazJugador extends JFrame implements Observer {
         //Imagen Jugador
         ImageIcon imagenJugador = new ImageIcon("src/sprites/trainer"+(rand1.nextInt(6))+".png");
         this.playerImageLabel.setIcon(imagenJugador);
-        this.playerImageLabel.setBounds(10, 0, 300, 350);
+        this.playerImageLabel.setBounds(10, 0, 200, 350);
         this.mainPanel.add(this.playerImageLabel);
 
         // Creamos las imágenes de los pokemons
-        int posicionPokemonX = 200;
+        int posicionPokemonX = 150;
         int posicionPokemonY = -75;
         
         this.lBotonPokemon= new ArrayList<JButton>();
         this.lEuforiaBoton= new ArrayList<JProgressBar>();
         for (int i = 0; i < numPokemon; i++) {  
-//        	String[] infoPokemon = {"Ataque: "+equipoJugador.getPokemon(i).getAtaque()+equipoJugador.getPokemon(i).getState().boostAtaque()+"\n"+" Defensa: "+equipoJugador.getPokemon(i).getDefensa()+equipoJugador.getPokemon(i).getState().boostDefensa()+"\n"+ " Vida: "+equipoJugador.getPokemon(i).getVida()+"\n"+ " Tipo: "+equipoJugador.getPokemon(i).getTipo()};
+//        	PanelPokemon pp=new PanelPokemon(posicionPokemonX + 30*i,i,this.getName());
+//        	
+//        	this.panelesPokemon.add(pp);
+//        	this.mainPanel.add(pp);
+//        	
+//        	pp.setVisible(true);
         	String[] infoPokemon = {" Ataque: "+Integer.toString(equipoJugador.getPokemon(i).getAtaque())+"\n"+" Defensa: "+Integer.toString(equipoJugador.getPokemon(i).getDefensa())+"\n"+ " Vida: "+Integer.toString(equipoJugador.getPokemon(i).getVida())+"\n"+ " Tipo: "+equipoJugador.getPokemon(i).getTipo()};
-            ImageIcon imagenPokemon = new ImageIcon("src/sprites/" + (rand1.nextInt(11)+1) + ".png");
+            
+        	//Imagen Pokemon
+        	ImageIcon imagenPokemon = new ImageIcon();
+            if (equipoJugador.getPokemon(i).getTipo().equals("Fuego")) {
+            	imagenPokemon=new ImageIcon("src/sprites/Fire/0charmander.png");
+            }else if  (equipoJugador.getPokemon(i).getTipo().equals("Agua")) {
+            	imagenPokemon=new ImageIcon("src/sprites/Water/0squirtle.png");
+            } else if (equipoJugador.getPokemon(i).getTipo().equals("Planta")) {
+            	imagenPokemon=new ImageIcon("src/sprites/0bulbasaur.png");
+            } else {
+            	imagenPokemon=new ImageIcon("src/sprites/Electrico/0pikachu.png");
+            }  
             JLabel labelImagenPokemon = new JLabel(imagenPokemon);
-            labelImagenPokemon.setBounds(posicionPokemonX + 30*i, posicionPokemonY, 200, 500);
+            labelImagenPokemon.setBackground(Color.WHITE);
+            labelImagenPokemon.setBounds(posicionPokemonX + 30*i, posicionPokemonY, 150, 500);
             this.pokemonImageLabels.add(labelImagenPokemon);
             this.mainPanel.add(labelImagenPokemon);
-                      
+            
+            //Boton Ataque
             JButton atacarPoke = new JButton("Ataca!"); 
             atacarPoke.setName("Boton" +(i+1));
             this.lBotonPokemon.add(atacarPoke);
-            atacarPoke.setBounds(posicionPokemonX + 30*i, posicionPokemonY + 350, 200, 30);
+            atacarPoke.setBounds(posicionPokemonX + 30*i+40, posicionPokemonY + 350, 70, 30);
             this.mainPanel.add(atacarPoke);
             atacarPoke.addActionListener(getMiControlador());
             
+            //Euforia
             JProgressBar estadoEuforia = new JProgressBar();
             estadoEuforia.setString("Euforia");
             estadoEuforia.setForeground(new Color(255, 99, 71));
             estadoEuforia.setStringPainted(true);
             this.lEuforiaBoton.add(estadoEuforia);
-            estadoEuforia.setBounds(posicionPokemonX + 30*i, posicionPokemonY + 400, 200, 30);
+            estadoEuforia.setBounds(posicionPokemonX + 30*i, posicionPokemonY + 389, 150, 15);
             this.mainPanel.add(estadoEuforia);
             int euforia=GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(getName()).getMiEquipo().getPokemon(i).getEuforia();
             int euforiaMax=GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(getName()).getMiEquipo().getPokemon(i).getEuforiaMax();
             int carga=(int) (100.0F*Float.parseFloat(Integer.toString(euforia)) / Integer.parseInt(Integer.toString(euforiaMax)));
             estadoEuforia.setValue(carga);
             
+            //Barra Vida
+            JProgressBar progressBar = new JProgressBar();
+            progressBar.setStringPainted(true);
+            progressBar.setString("health");
+            progressBar.setBorderPainted(false);
+            progressBar.setValue(100);
+            progressBar.setBounds(posicionPokemonX + 30*i, posicionPokemonY + 410, 150, 15);
+            this.mainPanel.add(progressBar);
+            this.listaVidaBar.add(progressBar);
+            
+            
+            
+          //Imagen Corazon
+            progressBar.setForeground(new Color(138, 226, 52));
+            ImageIcon corazoncito= new ImageIcon("src/Sprites/Corazon.png");
+            JLabel corazon= new JLabel (corazoncito);
+            corazon.setBounds(posicionPokemonX-25+32*i, posicionPokemonY + 410, 18, 15);
+            this.mainPanel.add(corazon);
+
+          //Imagen Rayo
+            ImageIcon rayito= new ImageIcon("src/Sprites/rayo.png");
+            JLabel rayo= new JLabel (rayito);
+            rayo.setBounds(posicionPokemonX-25+32*i, posicionPokemonY + 389, 18, 15);
+            this.mainPanel.add(rayo);
+            
+            
           //Agregar información encima de la foto del pokemon
             JTextArea infoPokemonTextArea = new JTextArea();
-            infoPokemonTextArea.setBounds(posicionPokemonX + 30*i, 20, 200, 70);
+            infoPokemonTextArea.setBounds(posicionPokemonX + 30*i+40, 20, 150, 70);
             this.listaInfor.add(infoPokemonTextArea);
             for(String info1 : infoPokemon) {
             	infoPokemonTextArea.setText(infoPokemonTextArea.getText() + info1 + "\n");
@@ -189,120 +194,18 @@ public class InterfazJugador extends JFrame implements Observer {
             }
 
             
-            posicionPokemonX += 200;
+            posicionPokemonX += 150;
         }
-        setSize(200 + numPokemon * 250, 415);
+        setSize(200 + numPokemon * 165, 415);
         setLocationRelativeTo(null);
         setVisible(true);
         
     }
 
-        // Creamos el panel principal
-//        this.mainPanel.setLayout(null);
-//        getContentPane().add(this.mainPanel);
-//
-//        // Creamos el botón en la esquina superior izquierda
-//        this.btnCambioX = new JButton();
-//        btnCambioX.setBounds(10, 10, 100, 30);
-//        boolean k=GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarTurno(playerName);
-//        if (k) {
-//        	btnCambioX.setBackground(Color.GREEN);
-//        	btnCambioX.setText("Tu Turno");
-//          } else {
-//        	  btnCambioX.setBackground(Color.YELLOW);
-//        	  btnCambioX.setText("Espera");
-//          }
-//        this.mainPanel.add(btnCambioX);
-//        btnCambioX.addMouseListener(getMiControlador());
-//
-//        //Imagen Jugador
-//        ImageIcon imagenJugador = new ImageIcon("src/sprites/trainer"+(rand1.nextInt(6))+".png");
-//        this.playerImageLabel.setIcon(imagenJugador);
-//        this.playerImageLabel.setBounds(10, 50, 300, 350);
-//        this.mainPanel.add(this.playerImageLabel);
-//
-//        // Creamos las imágenes de los pokemons
-//        int posicionPokemonX = 320;
-//        int posicionPokemonY = 50;
-//        
-//        this.lBotonPokemon= new ArrayList<JButton>();
-//        this.listaPanelEuforia=new ArrayList<JProgressBar>();
-//        for (int i = 0; i < numPokemon; i++) {  
-////        	String[] infoPokemon = {"Ataque: "+equipoJugador.getPokemon(i).getAtaque()+"\n"+" Defensa: "+equipoJugador.getPokemon(i).getDefensa()+"\n"+ " Vida: "+equipoJugador.getPokemon(i).getVida()+"\n"+ " Tipo: "+equipoJugador.getPokemon(i).getTipo()};
-////            ImageIcon imagenPokemon = new ImageIcon("src/sprites/" + (rand1.nextInt(11)+1) + ".png");
-////            JLabel labelImagenPokemon = new JLabel(imagenPokemon);
-////            labelImagenPokemon.setBounds(posicionPokemonX, posicionPokemonY, 250, 350);
-////            this.mainPanel.add(labelImagenPokemon);
-////                      
-////            JButton atacarPoke = new JButton("Ataca!"); 
-////            atacarPoke.setName("Boton" +(i+1));
-////            this.lBotonPokemon.add(atacarPoke);
-////            atacarPoke.setBounds(posicionPokemonX, posicionPokemonY + 350, 250, 30);
-////            this.mainPanel.add(atacarPoke);
-////            atacarPoke.addActionListener(getMiControlador());
-////            
-////          //Agregar información encima de la foto del pokemon
-////            JLabel infoPokemonLabel = new JLabel();
-////            infoPokemonLabel.setBounds(300 + 250*i, 50, 250, 50);
-////            this.listaInfor.add(infoPokemonLabel);
-////            for(String info1 : infoPokemon) {
-////                infoPokemonLabel.setText(infoPokemonLabel.getText() + info1 + "\n");
-////                this.mainPanel.add(infoPokemonLabel);
-////            }
-////            
-////            
-////
-////            
-////            posicionPokemonX += 250;
-//        	//Creamos un panel
-//        	JLabel pokemonPanel = new JLabel();
-//        	pokemonPanel.setLayout(new BoxLayout(pokemonPanel, BoxLayout.Y_AXIS));	
-//        	String[] infoPokemon = {"Ataque: "+equipoJugador.getPokemon(i).getAtaque()+"\n"+" Defensa: "+equipoJugador.getPokemon(i).getDefensa()+"\n"+ " Vida: "+equipoJugador.getPokemon(i).getVida()+"\n"+ " Tipo: "+equipoJugador.getPokemon(i).getTipo()};
-//        	//Sección de información del pokemon
-//        	JLabel infoLabel = new JLabel();
-//        	this.listaInfor.add(infoLabel);
-//        	for(String info1 : infoPokemon) {
-//              infoLabel.setText(infoLabel.getText() + info1 + "\n");
-//              pokemonPanel.add(infoLabel);
-//            }
-//        	//Seccion imagen Pokemon
-//        	JLabel imagenLabel = new JLabel();
-//        	ImageIcon imagenPokemon = new ImageIcon("src/sprites/" + (rand1.nextInt(11)+1) + ".png");
-//        	imagenLabel.setIcon(imagenPokemon);
-//        	pokemonPanel.add(imagenLabel);
-//        	
-//        	//Seccion Boton y ProgressBar
-//        	JPanel accionesPanel = new JPanel();
-//        	accionesPanel.setLayout(new BoxLayout(accionesPanel, BoxLayout.Y_AXIS));
-//        	
-//        	//Boton
-//        	JButton atacarPoke = new JButton("Ataca!"); 
-//        	atacarPoke.setName("Boton" +(i+1));
-//        	this.lBotonPokemon.add(atacarPoke);
-//        	atacarPoke.addActionListener(getMiControlador());
-//        	accionesPanel.add(atacarPoke);
-//        	
-//        	//ProgressBar
-//        	JProgressBar barraProgreso = new JProgressBar();
-//        	int valorEuforia= GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(playerName).getMiEquipo().getPokemon(i).getEuforia();
-//        	barraProgreso.setValue(valorEuforia);
-//        	this.listaPanelEuforia.add(barraProgreso);
-//        	accionesPanel.add(barraProgreso);
-//        	
-//        	pokemonPanel.add(accionesPanel);
-//        	this.lPokemonPanel.add(pokemonPanel);
-//        	this.mainPanel.add(lPokemonPanel.get(i));
-//          }
-//        posicionPokemonX += 250;
-//        setSize(320 + numPokemon * 250, 540);
-//        setLocationRelativeTo(null);
-//        setVisible(true);
-//        
-//        }
+  
         
-//        setSize(320 + numPokemon * 250, 540);
-//        setLocationRelativeTo(null);
-//        setVisible(true);
+
+
         
     
     
@@ -322,46 +225,6 @@ public class InterfazJugador extends JFrame implements Observer {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-//			int ind=0;
-//			boolean enc=false;
-//			while(ind<InterfazJugador.this.lBotonPokemon.size()&& !(enc)){
-//				JButton b = (JButton) arg0.getSource();
-////				System.out.println(InterfazJugador.this.lBotonPokemon.get(ind).getName());
-//				if (b.getName().equals(InterfazJugador.this.lBotonPokemon.get(ind).getName()) &&  !(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()) instanceof Modelo.NPC)&& GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarTurno(getName())&& !(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getDerrotado())) { 	
-//					if(!GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind).estaMuerto()) {
-//						if (!GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(playerName).getMiEquipo().getPokemon(ind).getAtaca()) {
-//							enc=true;
-////							System.out.println("Has entrado en lo importante");
-//							Tablero.getMiTablero().setJugadorAtacante(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName));
-//							Tablero.getMiTablero().setAtacantePokemon(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind));
-//							System.out.println("Jugador Atacante " + GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName).getNombre()+ "  "+GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind).getNombre());
-//							GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(playerName).getMiEquipo().getPokemon(ind).setAtaca(true);
-//						}else {
-//							System.out.println("Ya ha atacado");
-//						}
-//							
-//					}else {
-//						System.out.println("Este Pokemon ha muerto, elige otro");
-//					}
-//					
-//				}else if((GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()) instanceof Modelo.NPC) && (b.getName().equals(InterfazJugador.this.lBotonPokemon.get(ind).getName()))){
-//					if (GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind).getVida()!=0) {
-//					Tablero.getMiTablero().setDefendsPlayer(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName));
-//					Tablero.getMiTablero().setDefensaPokemon(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind));
-//					System.out.println("Jugador Defensor " + GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName).getNombre()+ "  "+GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind).getNombre());
-//			        Tablero.getMiTablero().atacar();
-//			        enc=true;
-//					}else {
-//						System.out.println("Este Pokemon ya le has derrotado, busca otro");
-//					}
-//				}else if (b.getName().equals(InterfazJugador.this.lBotonPokemon.get(ind).getName()) &&  !(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()) instanceof Modelo.NPC)&& !GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarTurno(getName())) {
-//					Tablero.getMiTablero().setDefendsPlayer(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName));
-//					Tablero.getMiTablero().setDefensaPokemon(GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind));
-//					System.out.println("Jugador Defensor " + GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(InterfazJugador.this.playerName).getNombre()+ "  "+GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(ind).getNombre());
-//			        Tablero.getMiTablero().atacar();
-//				}
-//				ind++;
-//			}
 			int ind=0;
 			boolean enc=false;
 			while(ind<InterfazJugador.this.lBotonPokemon.size()&&!(enc)) {
@@ -445,11 +308,15 @@ public class InterfazJugador extends JFrame implements Observer {
 			for (int i = 0; i < numPokemon; i++) {  
 //	        	String infoPokemon = ("Ataque: "+equipoJugador.getPokemon(i).getAtaque()+equipoJugador.getPokemon(i).getState().boostAtaque()+"\n" +"Defensa: "+equipoJugador.getPokemon(i).getDefensa()+equipoJugador.getPokemon(i).getState().boostDefensa() +"\n"+" Vida: "+equipoJugador.getPokemon(i).getVida()+ "\n" +" Tipo: "+equipoJugador.getPokemon(i).getTipo());
 	        	String infoPokemon = ("Ataque: "+equipoJugador.getPokemon(i).getAtaque()+"\n" +"Defensa: "+equipoJugador.getPokemon(i).getDefensa()+"\n"+" Vida: "+equipoJugador.getPokemon(i).getVida()+ "\n" +" Tipo: "+equipoJugador.getPokemon(i).getTipo());
-	            this.listaInfor.get(i).setText(infoPokemon);	                
+	            this.listaInfor.get(i).setText(infoPokemon);
+	            //Euforia
 	            int euforia=GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(getName()).getMiEquipo().getPokemon(i).getEuforia();
 	            int euforiaMax=GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(getName()).getMiEquipo().getPokemon(i).getEuforiaMax();
 	            int carga=(int) (100.0F*Float.parseFloat(Integer.toString(euforia)) / Integer.parseInt(Integer.toString(euforiaMax)));
 	            this.lEuforiaBoton.get(i).setValue(carga);
+	            //Vida
+	            int vida= (int)(100.0F * GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(playerName).getMiEquipo().getPokemon(i).getVida()/ GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(playerName).getMiEquipo().getPokemon(i).getVidaMax());
+	            this.listaVidaBar.get(i).setValue(vida);
 	        }
 		}
 		

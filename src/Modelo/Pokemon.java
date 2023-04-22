@@ -47,6 +47,10 @@ public abstract class Pokemon extends Observable{
 		return this.vida;
 	}
 	
+	public int getVidaMax() {
+		return this.maxHp;
+	}
+	
 	public boolean getAtaca() {
 		return this.haAtacado;
 	}
@@ -136,7 +140,6 @@ public abstract class Pokemon extends Observable{
 		this.vida -= daño;
 		System.out.println(+this.vida);
 		if (this.vida <= 0) {
-			this.vida=0;
 			this.setMuerto(true);
 		}
 		if (this.euforiaActual < this.euforiaMaxima) {
