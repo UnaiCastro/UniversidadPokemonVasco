@@ -181,7 +181,7 @@ public class InterfazJugador extends JFrame implements Observer {
             
           //Agregar información encima de la foto del pokemon
             JTextArea infoPokemonTextArea = new JTextArea();
-            infoPokemonTextArea.setBounds(300 + 250*i, 20, 350, 70);
+            infoPokemonTextArea.setBounds(300 + 250*i, 20, 200, 70);
             this.listaInfor.add(infoPokemonTextArea);
             for(String info1 : infoPokemon) {
             	infoPokemonTextArea.setText(infoPokemonTextArea.getText() + info1 + "\n");
