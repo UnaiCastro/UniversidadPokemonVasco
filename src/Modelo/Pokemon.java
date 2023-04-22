@@ -136,6 +136,7 @@ public abstract class Pokemon extends Observable{
 		this.vida -= daño;
 		System.out.println(+this.vida);
 		if (this.vida <= 0) {
+			this.vida=0;
 			this.setMuerto(true);
 		}
 		if (this.euforiaActual < this.euforiaMaxima) {

@@ -62,7 +62,7 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 	private void inicializar() {
 		 	frame = new JFrame("Pokemon Battle Arena");
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        frame.setSize(1080, 1080);
+	        frame.setSize(700, 275);
 
 
 	        JPanel mainPanel = new JPanel(new BorderLayout());
@@ -72,7 +72,7 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 	        try {
 	            JLabel imageLabel = new JLabel();
 	            Image image = ImageIO.read(new File("src/Sprites/main.png"));
-	            Image scaledImage = image.getScaledInstance(800, 400, Image.SCALE_SMOOTH);
+	            Image scaledImage = image.getScaledInstance(400, 200, Image.SCALE_SMOOTH);
 	            ImageIcon icon = new ImageIcon(scaledImage);
 	            imageLabel.setIcon(icon);
 	            imagePanel.add(imageLabel);

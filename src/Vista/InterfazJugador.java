@@ -142,28 +142,28 @@ public class InterfazJugador extends JFrame implements Observer {
         //Imagen Jugador
         ImageIcon imagenJugador = new ImageIcon("src/sprites/trainer"+(rand1.nextInt(6))+".png");
         this.playerImageLabel.setIcon(imagenJugador);
-        this.playerImageLabel.setBounds(10, 50, 300, 350);
+        this.playerImageLabel.setBounds(10, 0, 300, 350);
         this.mainPanel.add(this.playerImageLabel);
 
         // Creamos las imágenes de los pokemons
-        int posicionPokemonX = 320;
-        int posicionPokemonY = 50;
+        int posicionPokemonX = 200;
+        int posicionPokemonY = -75;
         
         this.lBotonPokemon= new ArrayList<JButton>();
         this.lEuforiaBoton= new ArrayList<JProgressBar>();
         for (int i = 0; i < numPokemon; i++) {  
 //        	String[] infoPokemon = {"Ataque: "+equipoJugador.getPokemon(i).getAtaque()+equipoJugador.getPokemon(i).getState().boostAtaque()+"\n"+" Defensa: "+equipoJugador.getPokemon(i).getDefensa()+equipoJugador.getPokemon(i).getState().boostDefensa()+"\n"+ " Vida: "+equipoJugador.getPokemon(i).getVida()+"\n"+ " Tipo: "+equipoJugador.getPokemon(i).getTipo()};
-        	String[] infoPokemon = {"Ataque: "+Integer.toString(equipoJugador.getPokemon(i).getAtaque())+"\n"+" Defensa: "+Integer.toString(equipoJugador.getPokemon(i).getDefensa())+"\n"+ " Vida: "+Integer.toString(equipoJugador.getPokemon(i).getVida())+"\n"+ " Tipo: "+equipoJugador.getPokemon(i).getTipo()};
+        	String[] infoPokemon = {" Ataque: "+Integer.toString(equipoJugador.getPokemon(i).getAtaque())+"\n"+" Defensa: "+Integer.toString(equipoJugador.getPokemon(i).getDefensa())+"\n"+ " Vida: "+Integer.toString(equipoJugador.getPokemon(i).getVida())+"\n"+ " Tipo: "+equipoJugador.getPokemon(i).getTipo()};
             ImageIcon imagenPokemon = new ImageIcon("src/sprites/" + (rand1.nextInt(11)+1) + ".png");
             JLabel labelImagenPokemon = new JLabel(imagenPokemon);
-            labelImagenPokemon.setBounds(posicionPokemonX, posicionPokemonY, 200, 500);
+            labelImagenPokemon.setBounds(posicionPokemonX + 30*i, posicionPokemonY, 200, 500);
             this.pokemonImageLabels.add(labelImagenPokemon);
             this.mainPanel.add(labelImagenPokemon);
                       
             JButton atacarPoke = new JButton("Ataca!"); 
             atacarPoke.setName("Boton" +(i+1));
             this.lBotonPokemon.add(atacarPoke);
-            atacarPoke.setBounds(posicionPokemonX, posicionPokemonY + 350, 250, 30);
+            atacarPoke.setBounds(posicionPokemonX + 30*i, posicionPokemonY + 350, 200, 30);
             this.mainPanel.add(atacarPoke);
             atacarPoke.addActionListener(getMiControlador());
             
@@ -172,7 +172,7 @@ public class InterfazJugador extends JFrame implements Observer {
             estadoEuforia.setForeground(new Color(255, 99, 71));
             estadoEuforia.setStringPainted(true);
             this.lEuforiaBoton.add(estadoEuforia);
-            estadoEuforia.setBounds(posicionPokemonX, posicionPokemonY + 400, 250, 30);
+            estadoEuforia.setBounds(posicionPokemonX + 30*i, posicionPokemonY + 400, 200, 30);
             this.mainPanel.add(estadoEuforia);
             int euforia=GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(getName()).getMiEquipo().getPokemon(i).getEuforia();
             int euforiaMax=GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(getName()).getMiEquipo().getPokemon(i).getEuforiaMax();
@@ -181,7 +181,7 @@ public class InterfazJugador extends JFrame implements Observer {
             
           //Agregar información encima de la foto del pokemon
             JTextArea infoPokemonTextArea = new JTextArea();
-            infoPokemonTextArea.setBounds(300 + 250*i, 20, 200, 70);
+            infoPokemonTextArea.setBounds(posicionPokemonX + 30*i, 20, 200, 70);
             this.listaInfor.add(infoPokemonTextArea);
             for(String info1 : infoPokemon) {
             	infoPokemonTextArea.setText(infoPokemonTextArea.getText() + info1 + "\n");
@@ -189,10 +189,9 @@ public class InterfazJugador extends JFrame implements Observer {
             }
 
             
-            posicionPokemonX += 250;
+            posicionPokemonX += 200;
         }
-
-        setSize(320 + numPokemon * 250, 540);
+        setSize(200 + numPokemon * 250, 415);
         setLocationRelativeTo(null);
         setVisible(true);
         
