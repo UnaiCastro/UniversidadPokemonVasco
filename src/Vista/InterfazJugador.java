@@ -33,6 +33,7 @@ import Modelo.Tablero;
 //import Vista.PanelPokemon;
 
 
+
 public class InterfazJugador extends JFrame implements Observer {
 	private JFrame frame;
 	private ArrayList<JButton> lBotonPokemon=null;
@@ -93,7 +94,7 @@ public class InterfazJugador extends JFrame implements Observer {
         	btnCambioX.setBackground(Color.GREEN);
         	btnCambioX.setText("Tu Turno");
           } else {
-        	  btnCambioX.setBackground(Color.YELLOW);
+        	  btnCambioX.setBackground(Color.ORANGE);
         	  btnCambioX.setText("Espera");
           }
         this.mainPanel.add(btnCambioX);
@@ -141,14 +142,14 @@ public class InterfazJugador extends JFrame implements Observer {
             JButton atacarPoke = new JButton("Ataca!"); 
             atacarPoke.setName("Boton" +(i+1));
             this.lBotonPokemon.add(atacarPoke);
-            atacarPoke.setBounds(posicionPokemonX + 30*i+40, posicionPokemonY + 350, 70, 30);
+            atacarPoke.setBounds(posicionPokemonX + 30*i+40, posicionPokemonY + 360, 70, 20);
             this.mainPanel.add(atacarPoke);
             atacarPoke.addActionListener(getMiControlador());
             
             //Euforia
             JProgressBar estadoEuforia = new JProgressBar();
             estadoEuforia.setString("Euforia");
-            estadoEuforia.setForeground(new Color(255, 99, 71));
+            estadoEuforia.setForeground(Color.yellow);
             estadoEuforia.setStringPainted(true);
             this.lEuforiaBoton.add(estadoEuforia);
             estadoEuforia.setBounds(posicionPokemonX + 30*i, posicionPokemonY + 389, 150, 15);
@@ -161,7 +162,7 @@ public class InterfazJugador extends JFrame implements Observer {
             //Barra Vida
             JProgressBar progressBar = new JProgressBar();
             progressBar.setStringPainted(true);
-            progressBar.setString("health");
+            progressBar.setString("Vida");
             progressBar.setBorderPainted(false);
             progressBar.setValue(100);
             progressBar.setBounds(posicionPokemonX + 30*i, posicionPokemonY + 410, 150, 15);
@@ -279,48 +280,90 @@ public class InterfazJugador extends JFrame implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof Jugador || o instanceof NPC) {
-	        // Obtener el objeto jugador o NPC que envió la actualización
-	        Object jugadorNPC = o;
-	        boolean turno = false;
-	        
-	        if (jugadorNPC instanceof Jugador) {
-	            // Obtener el turno del jugador
-	            turno = ((Jugador) jugadorNPC).getTurno();
-	        } else if (jugadorNPC instanceof NPC) {
-	            // Obtener el turno del NPC
-	            turno = ((NPC) jugadorNPC).getTurno();
-	        }
+			Object[] update = (Object[])arg;
 	        
 	        // Cambiar el color del botón según el turno
-	        if (turno) {
+	        if ((Boolean)update[0]) {
 	            // Es el turno del jugador o NPC, cambiar el color a verde
 	            this.btnCambioX.setBackground(Color.GREEN);
 	            this.btnCambioX.setText("Tu Turno");
 	        } else {
 	            // No es el turno del jugador o NPC, cambiar el color a amarillo
-	            this.btnCambioX.setBackground(Color.YELLOW);
+	            this.btnCambioX.setBackground(Color.ORANGE);
 	            this.btnCambioX.setText("Espera");
 	        }
 	        
 
 	    }
-		if (o instanceof Pokemon) {
-			for (int i = 0; i < numPokemon; i++) {  
-//	        	String infoPokemon = ("Ataque: "+equipoJugador.getPokemon(i).getAtaque()+equipoJugador.getPokemon(i).getState().boostAtaque()+"\n" +"Defensa: "+equipoJugador.getPokemon(i).getDefensa()+equipoJugador.getPokemon(i).getState().boostDefensa() +"\n"+" Vida: "+equipoJugador.getPokemon(i).getVida()+ "\n" +" Tipo: "+equipoJugador.getPokemon(i).getTipo());
-	        	String infoPokemon = ("Ataque: "+equipoJugador.getPokemon(i).getAtaque()+"\n" +"Defensa: "+equipoJugador.getPokemon(i).getDefensa()+"\n"+" Vida: "+equipoJugador.getPokemon(i).getVida()+ "\n" +" Tipo: "+equipoJugador.getPokemon(i).getTipo());
-	            this.listaInfor.get(i).setText(infoPokemon);
-	            //Euforia
-	            int euforia=GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(getName()).getMiEquipo().getPokemon(i).getEuforia();
-	            int euforiaMax=GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(getName()).getMiEquipo().getPokemon(i).getEuforiaMax();
-	            int carga=(int) (100.0F*Float.parseFloat(Integer.toString(euforia)) / Integer.parseInt(Integer.toString(euforiaMax)));
-	            this.lEuforiaBoton.get(i).setValue(carga);
-	            //Vida
-	            int vida= (int)(100.0F * GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(playerName).getMiEquipo().getPokemon(i).getVida()/ GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(playerName).getMiEquipo().getPokemon(i).getVidaMax());
-	            this.listaVidaBar.get(i).setValue(vida);
-	        }
+		if (o instanceof Pokemon) {			
+			int i=GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(playerName).getMiEquipo().getPosPokeObservable(((Pokemon) o).getNombre()) ; 
+//	        	String infoPokemon = ("Ataque: "+equipoJugador.getPokemon(i).getAtaque()+"\n" +"Defensa: "+equipoJugador.getPokemon(i).getDefensa()+"\n"+" Vida: "+equipoJugador.getPokemon(i).getVida()+ "\n" +" Tipo: "+equipoJugador.getPokemon(i).getTipo());
+//	            this.listaInfor.get(i).setText(infoPokemon);
+//	            //Euforia
+//	            int euforia=GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(getName()).getMiEquipo().getPokemon(i).getEuforia();
+//	            int euforiaMax=GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(getName()).getMiEquipo().getPokemon(i).getEuforiaMax();
+//	            int carga=(int) (100.0F*Float.parseFloat(Integer.toString(euforia)) / Integer.parseInt(Integer.toString(euforiaMax)));
+//	            this.lEuforiaBoton.get(i).setValue(carga);
+//	            //Vida
+//	            int vida= (int)(100.0F * GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(playerName).getMiEquipo().getPokemon(i).getVida()/ GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(playerName).getMiEquipo().getPokemon(i).getVidaMax());
+//	            this.listaVidaBar.get(i).setValue(vida);
+			String[] rr = (String[])arg;
+			int life = (int)(100.0F * Float.parseFloat(rr[2]) / Integer.parseInt(rr[3]));
+			this.listaVidaBar.get(i).setValue(life);
+			if (life <= 50) {
+				this.listaVidaBar.get(i).setForeground(Color.ORANGE);
+				ImageIcon imagenPokemon;
+				if (equipoJugador.getPokemon(i).getTipo().equals("Fuego")) {
+	            	imagenPokemon=new ImageIcon("src/sprites/Fire/1charmeleon.png");
+	            	this.pokemonImageLabels.get(i).setIcon(imagenPokemon);
+	            }else if  (equipoJugador.getPokemon(i).getTipo().equals("Agua")) {
+		           	imagenPokemon=new ImageIcon("src/sprites/Water/1wartotle.png");
+		           	this.pokemonImageLabels.get(i).setIcon(imagenPokemon);
+		        } else if (equipoJugador.getPokemon(i).getTipo().equals("Planta")) {
+		           	imagenPokemon=new ImageIcon("src/sprites/1ivysaur.png");
+		           	this.pokemonImageLabels.get(i).setIcon(imagenPokemon);
+	            } else {
+	            	imagenPokemon=new ImageIcon("src/sprites/Electrico/1raichu.png");
+	            	this.pokemonImageLabels.get(i).setIcon(imagenPokemon);
+		        }  
+			}
+			if (life <= 15) {
+				this.listaVidaBar.get(i).setForeground(Color.RED);
+				ImageIcon imagenPokemon;
+				if (equipoJugador.getPokemon(i).getTipo().equals("Fuego")) {
+		           	imagenPokemon=new ImageIcon("src/sprites/Fire/2charizard.png");
+		           	this.pokemonImageLabels.get(i).setIcon(imagenPokemon);
+		        }else if  (equipoJugador.getPokemon(i).getTipo().equals("Agua")) {
+		           	imagenPokemon=new ImageIcon("src/sprites/Water/2blastoise.png");
+		           	this.pokemonImageLabels.get(i).setIcon(imagenPokemon);
+	            } else if (equipoJugador.getPokemon(i).getTipo().equals("Planta")) {
+	            	imagenPokemon=new ImageIcon("src/sprites/2venusaur.png");
+	            	this.pokemonImageLabels.get(i).setIcon(imagenPokemon);
+		        } else {
+		           	imagenPokemon=new ImageIcon("src/sprites/Electrico/2raichu2.png");
+		           	this.pokemonImageLabels.get(i).setIcon(imagenPokemon);
+		        }  
+			}
+			int chg = (int)(100.0F * Float.parseFloat(rr[7]) / Integer.parseInt(rr[6]));
+			this.lEuforiaBoton.get(i).setValue(chg);
+			if (Integer.parseInt((String)rr[2]) >= 1) {       
+				if (chg == 100) {
+					this.listaInfor.get(i).setForeground(new Color(255, 99, 71));
+			    } else {   
+			    	this.listaInfor.get(i).setForeground(Color.BLACK);
+				}
+			}else {		       
+				this.listaInfor.get(i).setForeground(Color.WHITE);
+				this.lBotonPokemon.get(i).setForeground(Color.WHITE);
+				this.lEuforiaBoton.get(i).setForeground(Color.WHITE);
+				this.listaVidaBar.get(i).setForeground(Color.WHITE);
+			} 
+			this.listaInfor.get(i).setText("Ataque: " + rr[0] + "\nDefensa: " + rr[1] + "\nVida: " + rr[2] + "\nTipo: " + rr[4]);        	
 		}
-		
 	}
+		
+		
+	
 		
 	public String getName() {
 		return this.playerName;

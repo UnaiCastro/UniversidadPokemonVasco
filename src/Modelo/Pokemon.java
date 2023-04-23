@@ -26,11 +26,10 @@ public abstract class Pokemon extends Observable{
 	public Pokemon() {
 		this.ataque=11+this.randomNumero(1,7);
 		this.defensa=3+this.randomNumero(1,4);//random(1-4);
-		this.vida=200;//+this.randomNumero(1,20);//+random(1-20);
+		this.vida=30;//+this.randomNumero(1,20);//+random(1-20);
 		this.maxHp=this.vida;
 		this.euforiaMaxima = this.rand.nextInt(3) + 4;
 		this.euforiaActual = 0;
-
 	}
 	
 	public String getTipo() {
@@ -103,20 +102,15 @@ public abstract class Pokemon extends Observable{
 			this.defensa=this.defensa+100;
 		}
 		setChanged();
-		this.notifyObservers();
+		this.notifyObservers(new String[] { String.valueOf(Integer.toString(this.getAtaque())),String.valueOf(Integer.toString(this.getDefensa())), String.valueOf(Integer.toString(this.vida)),String.valueOf(Integer.toString(this.maxHp)), this.tipo.toString(), Integer.toString(this.evoState.evolucion()),Integer.toString(this.euforiaMaxima), Integer.toString(this.euforiaActual)});
 	}
 	
 	public void bajarEuforia() {
-//		this.ataque=this.ataque-100;			
-//		this.defensa=this.defensa-100;
-//		this.euforiaActual=0;
-//		setChanged();
-//		this.notifyObservers();
 		if (this.evoState instanceof Euforia) {
 			this.euforiaActual = 0;
 			revisionEuforiaEvolu();
 			setChanged();
-			notifyObservers();
+			this.notifyObservers(new String[] { String.valueOf(Integer.toString(this.getAtaque())),String.valueOf(Integer.toString(this.getDefensa())), String.valueOf(Integer.toString(this.vida)),String.valueOf(Integer.toString(this.maxHp)), this.tipo.toString(), Integer.toString(this.evoState.evolucion()),Integer.toString(this.euforiaMaxima), Integer.toString(this.euforiaActual)});
 		}
 	}
 	
@@ -141,6 +135,7 @@ public abstract class Pokemon extends Observable{
 		System.out.println(+this.vida);
 		if (this.vida <= 0) {
 			this.setMuerto(true);
+			this.vida=0;
 		}
 		if (this.euforiaActual < this.euforiaMaxima) {
 			this.euforiaActual++;
@@ -151,7 +146,7 @@ public abstract class Pokemon extends Observable{
 		} 
 		revisionEuforiaEvolu();
 		setChanged();
-		notifyObservers();
+		this.notifyObservers(new String[] { String.valueOf(Integer.toString(this.getAtaque())),String.valueOf(Integer.toString(this.getDefensa())), String.valueOf(Integer.toString(this.vida)),String.valueOf(Integer.toString(this.maxHp)), this.tipo.toString(), Integer.toString(this.evoState.evolucion()),Integer.toString(this.euforiaMaxima), Integer.toString(this.euforiaActual)});
 		return this.vida;
 	}
 	

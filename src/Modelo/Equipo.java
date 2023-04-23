@@ -85,5 +85,16 @@ public class Equipo {
 		this.getPokemon(i).actuEuforia();
 		
 	}
-	
+
+	public int getPosPokeObservable(String nombre) {
+		int ind=0;
+		int indF=0;
+		while(ind<this.lPokemon.size()) {
+			if (this.lPokemon.get(ind).getNombre().equals(nombre)) {
+				indF=ind;
+			}
+			ind++;
+		}
+		return indF;
+	}
 }
