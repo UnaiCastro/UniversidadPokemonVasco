@@ -7,13 +7,13 @@ public class Jugador extends SuperJugador{
 		this.nombre= pJugador;
 	}
 	
-	public void setNombre(String pJugador) {
-		this.nombre=pJugador;
-	}
-	
-	public void setTurno(Boolean pTurno) {
-		this.turno=pTurno;
-	}
+//	public void setNombre(String pJugador) {
+//		this.nombre=pJugador;
+//	}
+//	
+//	public void setTurno(Boolean pTurno) {
+//		this.turno=pTurno;
+//	}
 
 	@Override
 	public void atacarN() {

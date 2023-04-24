@@ -16,18 +16,18 @@ public class PokemonFactory {
 		return mArmaFactory;
 	}
 	
-	public Pokemon createPokemon(int i, String pNombre) {
+	public Pokemon createPokemon(int i, String pNombre, String nombreJug) {
 		if(i==1) {
-			return new Planta(pNombre);
+			return new Planta(pNombre,nombreJug);
 		}
 		else if(i==2) {
-			return new Agua(pNombre);
+			return new Agua(pNombre,nombreJug);
 		}
 		else if(i==3) {
-			return new Electrico(pNombre);
+			return new Electrico(pNombre,nombreJug);
 		}
 		else {
-			return new Fuego(pNombre);
+			return new Fuego(pNombre,nombreJug);
 		}
 		
 	}//

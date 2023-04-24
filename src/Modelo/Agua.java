@@ -2,9 +2,11 @@ package Modelo;
 
 public class Agua extends Pokemon {
 	
-	public Agua(String pNombre) {	
+	public Agua(String pNombre, String nombreJug) {	
 		this.nombre=pNombre;
 		this.tipo="Agua";
+		this.nombreJugadorPerteneciente=nombreJug;
+
 	}
 
 	@Override

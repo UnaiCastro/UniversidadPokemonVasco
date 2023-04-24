@@ -9,13 +9,13 @@ public class NPC extends SuperJugador{
 		this.nombre= pNombre;
 	}
 	
-	public void setNombre(String pJugador) {
-		this.nombre=pJugador;
-	}
-	
-	public void setTurno(Boolean pTurno) {
-		this.turno=pTurno;
-	}
+//	public void setNombre(String pJugador) {
+//		this.nombre=pJugador;
+//	}
+//	
+//	public void setTurno(Boolean pTurno) {
+//		this.turno=pTurno;
+//	}
 
 	
 	public void atacarN() {

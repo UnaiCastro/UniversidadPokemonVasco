@@ -3,8 +3,6 @@ package Modelo;
 import java.util.Iterator;
 import java.util.Random;
 
-import javax.swing.JOptionPane;
-
 import java.util.ArrayList;
 
 public class Equipo {
@@ -23,12 +21,12 @@ public class Equipo {
 		return this.lPokemon.iterator();
 	}//
 	
-	public void anadirPokemon(int nPokemon){
+	public void anadirPokemon(int nPokemon, String nombreJug){
 		//this.lPokemon.add(pPokemon);
 		System.out.println("Hola estas en el Equipo :)");
 		for (int i=0;i<nPokemon;i++) {
 			int real=i+1;
-			this.lPokemon.add(PokemonFactory.getMiArmaFactory().createPokemon(rand.nextInt(4)+1,"Pokemon "+real));
+			this.lPokemon.add(PokemonFactory.getMiArmaFactory().createPokemon(rand.nextInt(4)+1,"Pokemon "+real,nombreJug));
 			//System.out.println("Creado Pokemon numero"+" "+real);
 		}
 		//this.comprobarLista();

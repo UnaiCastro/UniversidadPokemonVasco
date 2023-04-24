@@ -86,7 +86,7 @@ public class Tablero {
 			this.pokemon1.setAtaca(true);
 			if (GestorJuegoPokemon.getMiGestorJuegoPokemon().hayGanador()) {
 				this.jugador1.setderrotado(false);
-				JOptionPane.showMessageDialog(null, "¡Se ha acabado, ganaste!");
+				JOptionPane.showMessageDialog(null, "¡Se ha acabado, ganaste " +this.jugador1.getNombre()+" !");
 				System.exit(0);
 			}
 			

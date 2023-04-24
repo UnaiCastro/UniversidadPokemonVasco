@@ -2,9 +2,11 @@ package Modelo;
 
 public class Electrico extends Pokemon {
 	
-	public Electrico(String pNombre) {
+	public Electrico(String pNombre, String nombreJug) {
 		this.tipo="Electrico";
 		this.nombre=pNombre;
+		this.nombreJugadorPerteneciente=nombreJug;
+
 
 	}
 

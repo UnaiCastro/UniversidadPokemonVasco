@@ -10,6 +10,7 @@ import Modelo.StateEvolucion.PrimerEvo;
 import Modelo.StateEvolucion.SegunEvo;
 
 public abstract class Pokemon extends Observable{
+	protected String nombreJugadorPerteneciente;
 	private int ataque;
 	private int vida;
 	private int maxHp;
@@ -102,15 +103,20 @@ public abstract class Pokemon extends Observable{
 			this.defensa=this.defensa+100;
 		}
 		setChanged();
-		this.notifyObservers(new String[] { String.valueOf(Integer.toString(this.getAtaque())),String.valueOf(Integer.toString(this.getDefensa())), String.valueOf(Integer.toString(this.vida)),String.valueOf(Integer.toString(this.maxHp)), this.tipo.toString(), Integer.toString(this.evoState.evolucion()),Integer.toString(this.euforiaMaxima), Integer.toString(this.euforiaActual)});
+//		this.notifyObservers(new String[] { String.valueOf(Integer.toString(this.getAtaque())),String.valueOf(Integer.toString(this.getDefensa())), String.valueOf(Integer.toString(this.vida)),String.valueOf(Integer.toString(this.maxHp)), this.tipo.toString(), Integer.toString(this.evoState.evolucion()),Integer.toString(this.euforiaMaxima), Integer.toString(this.euforiaActual)});
+
+		this.notifyObservers(new String[] { String.valueOf(Integer.toString(this.getAtaque())),String.valueOf(Integer.toString(this.getDefensa())), String.valueOf(Integer.toString(this.vida)),String.valueOf(Integer.toString(this.maxHp)), this.tipo.toString(), Integer.toString(this.evoState.evolucion()),Integer.toString(this.euforiaMaxima), Integer.toString(this.euforiaActual),Boolean.toString(GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(nombreJugadorPerteneciente).getDerrotado())});
 	}
 	
 	public void bajarEuforia() {
 		if (this.evoState instanceof Euforia) {
 			this.euforiaActual = 0;
 			revisionEuforiaEvolu();
-			setChanged();
-			this.notifyObservers(new String[] { String.valueOf(Integer.toString(this.getAtaque())),String.valueOf(Integer.toString(this.getDefensa())), String.valueOf(Integer.toString(this.vida)),String.valueOf(Integer.toString(this.maxHp)), this.tipo.toString(), Integer.toString(this.evoState.evolucion()),Integer.toString(this.euforiaMaxima), Integer.toString(this.euforiaActual)});
+			setChanged();		
+//			this.notifyObservers(new String[] { String.valueOf(Integer.toString(this.getAtaque())),String.valueOf(Integer.toString(this.getDefensa())), String.valueOf(Integer.toString(this.vida)),String.valueOf(Integer.toString(this.maxHp)), this.tipo.toString(), Integer.toString(this.evoState.evolucion()),Integer.toString(this.euforiaMaxima), Integer.toString(this.euforiaActual)});
+			this.notifyObservers(new String[] { String.valueOf(Integer.toString(this.getAtaque())),String.valueOf(Integer.toString(this.getDefensa())), String.valueOf(Integer.toString(this.vida)),String.valueOf(Integer.toString(this.maxHp)), this.tipo.toString(), Integer.toString(this.evoState.evolucion()),Integer.toString(this.euforiaMaxima), Integer.toString(this.euforiaActual),Boolean.toString(GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(nombreJugadorPerteneciente).getDerrotado())});
+
+//			this.notifyObservers(new String[] { String.valueOf(Integer.toString(this.getAtaque())),String.valueOf(Integer.toString(this.getDefensa())), String.valueOf(Integer.toString(this.vida)),String.valueOf(Integer.toString(this.maxHp)), this.tipo.toString(), Integer.toString(this.evoState.evolucion()),Integer.toString(this.euforiaMaxima), Integer.toString(this.euforiaActual)});
 		}
 	}
 	
@@ -144,9 +150,15 @@ public abstract class Pokemon extends Observable{
 			      
 			this.euforiaActual = this.euforiaMaxima;
 		} 
+		if (GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(nombreJugadorPerteneciente).equipoPokemon.todosMueertos()) {
+			GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(nombreJugadorPerteneciente).setderrotado(true);
+			System.out.println("Has muerto "+" "+GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(nombreJugadorPerteneciente).nombre);
+		}
 		revisionEuforiaEvolu();
 		setChanged();
-		this.notifyObservers(new String[] { String.valueOf(Integer.toString(this.getAtaque())),String.valueOf(Integer.toString(this.getDefensa())), String.valueOf(Integer.toString(this.vida)),String.valueOf(Integer.toString(this.maxHp)), this.tipo.toString(), Integer.toString(this.evoState.evolucion()),Integer.toString(this.euforiaMaxima), Integer.toString(this.euforiaActual)});
+		this.notifyObservers(new String[] { String.valueOf(Integer.toString(this.getAtaque())),String.valueOf(Integer.toString(this.getDefensa())), String.valueOf(Integer.toString(this.vida)),String.valueOf(Integer.toString(this.maxHp)), this.tipo.toString(), Integer.toString(this.evoState.evolucion()),Integer.toString(this.euforiaMaxima), Integer.toString(this.euforiaActual),Boolean.toString(GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(nombreJugadorPerteneciente).getDerrotado())});
+
+//		this.notifyObservers(new String[] { String.valueOf(Integer.toString(this.getAtaque())),String.valueOf(Integer.toString(this.getDefensa())), String.valueOf(Integer.toString(this.vida)),String.valueOf(Integer.toString(this.maxHp)), this.tipo.toString(), Integer.toString(this.evoState.evolucion()),Integer.toString(this.euforiaMaxima), Integer.toString(this.euforiaActual)});
 		return this.vida;
 	}
 	

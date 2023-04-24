@@ -18,7 +18,7 @@ public abstract class SuperJugador extends Observable{
 	
 	public void añadirPokemons(int numPokemons)
 	{
-		this.equipoPokemon.anadirPokemon(numPokemons);
+		this.equipoPokemon.anadirPokemon(numPokemons,this.nombre);
 		
 	}//
 	

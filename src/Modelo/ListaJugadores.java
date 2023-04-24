@@ -152,5 +152,26 @@ public class ListaJugadores {
 	public boolean hayGanador() {
 		return ((int)this.lJugadores.stream().filter(p -> p.getDerrotado()).count() == this.lJugadores.size() - 1);		
 	}
+
+	public void mirarBotonCambio(String pJugador) {
+		if (this.mirarJugador(pJugador) instanceof Jugador) {//Mirar quien lo ha pulsado
+			this.mirarJugador(pJugador).getMiEquipo().ponerPokeAtacados();
+			this.cambiarTurno(this.mirarJugador(pJugador));//Cambias Turno
+			if (this.mirarJugador(this.getJugadorTurno().getNombre()) instanceof NPC) {
+				this.mirarJugador(this.getJugadorTurno().getNombre()).atacarN();
+				this.cambiarTurno(this.mirarJugador(this.getJugadorTurno().getNombre()));
+				SuperJugador npc_jug=this.getJugadorTurno();
+					while(npc_jug instanceof NPC) {
+						npc_jug.atacarN();
+						this.cambiarTurno(npc_jug);
+						npc_jug=this.getJugadorTurno();
+					}
+			}else {
+				System.out.println("Pulsa los botones correspondientes");
+			}
+		}else {
+			System.out.println("Soy NPC, no puedes darle aqui");
+		}
+	}
 	
 }
