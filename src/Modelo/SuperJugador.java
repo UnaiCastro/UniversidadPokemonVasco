@@ -32,8 +32,16 @@ public abstract class SuperJugador extends Observable{
 	
 	public void setTurno(boolean pBoolean) {
 		this.turno=pBoolean;
-		this.setChanged();
-		notifyObservers(new Object[] { Boolean.valueOf(this.turno)});
+		if (this.turno) {
+			this.setChanged();
+			notifyObservers(new String[] {String.valueOf(1)});
+		}else {
+			this.setChanged();
+			notifyObservers(new String[] { String.valueOf(0)});
+		}
+		
+//		this.setChanged();
+//		notifyObservers(new Object[] { Boolean.valueOf(this.turno)});
 	}//
 
 	public Pokemon getPokemon(int ind) {

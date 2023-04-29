@@ -1,17 +1,17 @@
 package Vista;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
+//import java.awt.GridBagConstraints;
+//import java.awt.GridBagLayout;
+//import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Insets;
+//import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
+//import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -167,7 +167,6 @@ public class InterfazJuegoPokemon extends JFrame implements Observer {
 			while(into.hasNext()) {
 				SuperJugador act=into.next();
 				//System.out.println("Soy "+act.getNombre());
-//				Equipo pEquipo=act.getMiEquipo();
 				if (act.getNombre().equals("Jugador"+" "+iJugador)){
 					new InterfazJugador(act.getNombre(),act.getMiEquipo().getTamanoEquipo(),act.getMiEquipo());
 					iJugador++;

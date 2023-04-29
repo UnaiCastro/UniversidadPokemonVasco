@@ -123,17 +123,24 @@ public class ListaJugadores {
 
 	public void cambiarTurno(SuperJugador pJugador) {
 		Iterator<SuperJugador> itr=this.getIterador();
-		for (int i=0;i<this.lJugadores.size();i++){
+		while(itr.hasNext()) {
 			SuperJugador act=itr.next();
-			if (act.getNombre().equals(pJugador.getNombre())) {
-				this.lJugadores.get(i).setTurno(false);
-				Random rand = new Random();
-				int indice=rand.nextInt(this.getMisJugadores().size());
-				this.lJugadores.get(indice).setTurno(true);
-				System.out.println("Es el turno de "+this.lJugadores.get(indice).getNombre());
-				break;
-			}
+			act.setTurno(false);
+//		for (int i=0;i<this.lJugadores.size();i++){
+//			
+//			SuperJugador act=itr.next();
+//			if (act.getNombre().equals(pJugador.getNombre())) {
+//				this.lJugadores.get(i).setTurno(false);
+//				Random rand = new Random();
+//				int indice=rand.nextInt(this.getMisJugadores().size());
+//				this.lJugadores.get(indice).setTurno(true);
+//				System.out.println("Es el turno de "+this.lJugadores.get(indice).getNombre());
+//				break;
+//			}
 		}
+		Random rand = new Random();
+		int indice=rand.nextInt(this.getMisJugadores().size());
+		this.lJugadores.get(indice).setTurno(true);
 	}
 	
 	public SuperJugador getJugadorTurno() {
@@ -157,18 +164,24 @@ public class ListaJugadores {
 		if (this.mirarJugador(pJugador) instanceof Jugador) {//Mirar quien lo ha pulsado
 			this.mirarJugador(pJugador).getMiEquipo().ponerPokeAtacados();
 			this.cambiarTurno(this.mirarJugador(pJugador));//Cambias Turno
-			if (this.mirarJugador(this.getJugadorTurno().getNombre()) instanceof NPC) {
-				this.mirarJugador(this.getJugadorTurno().getNombre()).atacarN();
-				this.cambiarTurno(this.mirarJugador(this.getJugadorTurno().getNombre()));
-				SuperJugador npc_jug=this.getJugadorTurno();
-					while(npc_jug instanceof NPC) {
-						npc_jug.atacarN();
-						this.cambiarTurno(npc_jug);
-						npc_jug=this.getJugadorTurno();
-					}
-			}else {
-				System.out.println("Pulsa los botones correspondientes");
+			SuperJugador npc_jug=this.getJugadorTurno();
+			while(npc_jug instanceof NPC) {
+				npc_jug.atacarN();
+				this.cambiarTurno(npc_jug);
+				npc_jug=this.getJugadorTurno();
 			}
+//			if (this.mirarJugador(this.getJugadorTurno().getNombre()) instanceof NPC) {
+//				this.mirarJugador(this.getJugadorTurno().getNombre()).atacarN();
+//				this.cambiarTurno(this.mirarJugador(this.getJugadorTurno().getNombre()));
+//				SuperJugador npc_jug=this.getJugadorTurno();
+//					while(npc_jug instanceof NPC) {
+//						npc_jug.atacarN();
+//						this.cambiarTurno(npc_jug);
+//						npc_jug=this.getJugadorTurno();
+//					}
+//			}else {
+//				System.out.println("Pulsa los botones correspondientes");
+//			}
 		}else {
 			System.out.println("Soy NPC, no puedes darle aqui");
 		}
