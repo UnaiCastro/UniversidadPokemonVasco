@@ -66,7 +66,7 @@ public class InterfazJugador extends JFrame implements Observer {
 		setVisible(true);
 		GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(playerName).addObserver(this);
 		for (int i=0;i<numPokemon;i++) {
-			GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(playerName).getMiEquipo().getPokemon(i).addObserver(this);
+			GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(playerName).getMiEquipo().getPokemon(i).addObserver(this);
 		}
 	}
 
@@ -149,8 +149,8 @@ public class InterfazJugador extends JFrame implements Observer {
             this.lEuforiaBoton.add(estadoEuforia);
             estadoEuforia.setBounds(posicionPokemonX + 30*i, posicionPokemonY + 389, 150, 15);
             this.mainPanel.add(estadoEuforia);
-            int euforia=GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(getName()).getMiEquipo().getPokemon(i).getEuforia();
-            int euforiaMax=GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(getName()).getMiEquipo().getPokemon(i).getEuforiaMax();
+            int euforia=GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(i).getEuforia();
+            int euforiaMax=GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(getName()).getMiEquipo().getPokemon(i).getEuforiaMax();
             int carga=(int) (100.0F*Float.parseFloat(Integer.toString(euforia)) / Integer.parseInt(Integer.toString(euforiaMax)));
             estadoEuforia.setValue(carga);
 				
@@ -280,7 +280,7 @@ public class InterfazJugador extends JFrame implements Observer {
 
 	    }
 		if (o instanceof Pokemon) {			
-			int i=GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(playerName).getMiEquipo().getPosPokeObservable(((Pokemon) o).getNombre()) ; 
+			int i=GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(playerName).getMiEquipo().getPosPokeObservable(((Pokemon) o).getNombre()) ; 
 
 			//	        	String infoPokemon = ("Ataque: "+equipoJugador.getPokemon(i).getAtaque()+"\n" +"Defensa: "+equipoJugador.getPokemon(i).getDefensa()+"\n"+" Vida: "+equipoJugador.getPokemon(i).getVida()+ "\n" +" Tipo: "+equipoJugador.getPokemon(i).getTipo());
 //	            this.listaInfor.get(i).setText(infoPokemon);

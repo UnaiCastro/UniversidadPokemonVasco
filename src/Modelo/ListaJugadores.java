@@ -141,6 +141,7 @@ public class ListaJugadores {
 		Random rand = new Random();
 		int indice=rand.nextInt(this.getMisJugadores().size());
 		this.lJugadores.get(indice).setTurno(true);
+//		this.lJugadores.stream().forEach()
 	}
 	
 	public SuperJugador getJugadorTurno() {
@@ -170,18 +171,7 @@ public class ListaJugadores {
 				this.cambiarTurno(npc_jug);
 				npc_jug=this.getJugadorTurno();
 			}
-//			if (this.mirarJugador(this.getJugadorTurno().getNombre()) instanceof NPC) {
-//				this.mirarJugador(this.getJugadorTurno().getNombre()).atacarN();
-//				this.cambiarTurno(this.mirarJugador(this.getJugadorTurno().getNombre()));
-//				SuperJugador npc_jug=this.getJugadorTurno();
-//					while(npc_jug instanceof NPC) {
-//						npc_jug.atacarN();
-//						this.cambiarTurno(npc_jug);
-//						npc_jug=this.getJugadorTurno();
-//					}
-//			}else {
-//				System.out.println("Pulsa los botones correspondientes");
-//			}
+
 		}else {
 			System.out.println("Soy NPC, no puedes darle aqui");
 		}

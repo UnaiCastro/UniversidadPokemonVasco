@@ -150,9 +150,9 @@ public abstract class Pokemon extends Observable{
 			      
 			this.euforiaActual = this.euforiaMaxima;
 		} 
-		if (GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(nombreJugadorPerteneciente).equipoPokemon.todosMueertos()) {
-			GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(nombreJugadorPerteneciente).setderrotado(true);
-			System.out.println("Has muerto "+" "+GestorJuegoPokemon.getMiGestorJuegoPokemon().getLista().mirarJugador(nombreJugadorPerteneciente).nombre);
+		if (GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(nombreJugadorPerteneciente).equipoPokemon.todosMueertos()) {
+			GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(nombreJugadorPerteneciente).setderrotado(true);
+			System.out.println("Has muerto "+" "+GestorJuegoPokemon.getMiGestorJuegoPokemon().mirarJugador(nombreJugadorPerteneciente).nombre);
 		}
 		revisionEuforiaEvolu();
 		setChanged();
